@@ -15,7 +15,7 @@ function App() {
     <Wrapper>
       <SideBar />
 
-      <DefaultMainPage onOpenSideBar={()=>{setOpen(true)}} >
+      <DefaultMainPage open={open} onOpenSideBar={()=>{setOpen(true)}} >
           
       </DefaultMainPage>
       <SideBarMobile open={open} onClose={handleCLose} />
