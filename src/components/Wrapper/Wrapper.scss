@@ -1,0 +1,10 @@
+.full-wrapper {
+  background-color: #c4c4c4;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 600px) {
+    position: absolute;
+  }
+}

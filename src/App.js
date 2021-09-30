@@ -1,11 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-import NavBar from './components/navbar/NavBar';
+import {  useState } from "react";
+import "./App.css";
+import Wrapper from "./components/Wrapper/Wrapper";
+import DefaultMainPage from "./components/DefaultMainPage/DefaultMainPage";
+
+import SideBar from "./components/SideBar/SideBar";
+import SideBarMobile from "./components/SideBarMobile/SideBarMobile";
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const handleCLose = () => {
+    setOpen(false);
+  };
   return (
-    <div className="App">
-     {/*  <header className="App-header">
+    <Wrapper>
+      <SideBar />
+
+      <DefaultMainPage onOpenSideBar={()=>{setOpen(true)}} >
+          
+      </DefaultMainPage>
+      <SideBarMobile open={open} onClose={handleCLose} />
+    
+    </Wrapper>
+  );
+}
+
+export default App;
+/*  <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,10 +38,4 @@ function App() {
         >
           Learn React
         </a>
-      </header> */}
-      <NavBar/>
-    </div>
-  );
-}
-
-export default App;
+      </header>    <NavBar/>*/
