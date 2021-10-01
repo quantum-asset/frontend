@@ -4,21 +4,24 @@ import "./DefaultMainPage.scss";
 import MainPageHeader from "./MainPageHeader";
 import MenuIcon from "@material-ui/icons/Menu";
 import { IconButton } from "@material-ui/core";
+import SideBarButton from "../SideBar/SideBarButton";
+import IconAssets from "../../icons/IconAssets";
+import IconDashBoard from "../../icons/IconDashBoard";
 const DefaultMainPage = (props) => {
-  const { children, onOpenSideBar, open } = props;
+  const { children, onOpenSideBar } = props;
   return (
     <div className="main-page-wrapper">
       <TopBar>
-        {open && (
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-            onClick={onOpenSideBar}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
+        <IconButton
+          className="menu-button-mobile"
+          color="primary"
+          aria-label="upload picture"
+          component="span"
+          onClick={onOpenSideBar}
+        >
+          <MenuIcon />
+        </IconButton>
+        <SideBarButton></SideBarButton>
       </TopBar>
       <MainPageHeader />
       {children}

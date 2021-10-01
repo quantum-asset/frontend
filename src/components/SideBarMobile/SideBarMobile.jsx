@@ -5,7 +5,7 @@ const SideBarMobile = (props) => {
   if (open)
     return (
       <div className="main-side-bar-mobile">
-          <button onClick={onClose}>X</button>
+        <button onClick={onClose}>X</button>
         <div className="side-bar-actions">{actions}</div>
 
         <div className="side-bar-logout"></div>

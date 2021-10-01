@@ -1,25 +1,36 @@
-import {  useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Wrapper from "./components/Wrapper/Wrapper";
-import DefaultMainPage from "./components/DefaultMainPage/DefaultMainPage";
 
-import SideBar from "./components/SideBar/SideBar";
-import SideBarMobile from "./components/SideBarMobile/SideBarMobile";
+import { BrowserRouter, Route } from "react-router-dom";
+import { useUserValue } from "./context/Sesion";
+import Home from "./Pages/Home";
+import DetailTemplate from "./Pages/DetailTemplate";
 
 function App() {
-  const [open, setOpen] = useState(false);
-  const handleCLose = () => {
-    setOpen(false);
-  };
+  const [{ usuario, auth }, dispatch] = useUserValue();
+
+ 
   return (
     <Wrapper>
-      <SideBar />
+      <BrowserRouter>
+        <Route
+          exact
+          path="/"
+          component={(props) => (
+            <Home {...props} />
+          )}
+        />
+         <Route
+          exact
+          path="/template"
+          component={(props) => (
+            <DetailTemplate {...props} />
+          )}
+        />
+      </BrowserRouter>
 
-      <DefaultMainPage open={open} onOpenSideBar={()=>{setOpen(true)}} >
-          
-      </DefaultMainPage>
-      <SideBarMobile open={open} onClose={handleCLose} />
-    
+     
     </Wrapper>
   );
 }
