@@ -10,6 +10,7 @@ import SideBarButton from "../components/SideBar/SideBarButton";
 import IconSelector, {
   sideBarOptions,
 } from "../components/SideBar/SideBarOptions";
+import SideBarMobileButton from "../components/SideBarMobile/SideBarMobileButton";
 
 const DetailTemplate = (props) => {
   const [open, setOpen] = useState(false);
@@ -52,7 +53,26 @@ const DetailTemplate = (props) => {
           setOpen(true);
         }}
       ></DefaultMainPage>
-      <SideBarMobile open={open} onClose={handleCLose} />
+      <SideBarMobile
+        open={open}
+        onClose={handleCLose}
+        actions={sideBarOptions.map((label, index) => (
+          <SideBarMobileButton onClick={(e) => handleClick(index)}>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <IconSelector
+                label={label}
+                color={"#ffe500"}
+                size={45}
+              />
+            </IconButton>
+            {label}
+          </SideBarMobileButton>
+        ))}
+      />
     </Fragment>
   );
 };
