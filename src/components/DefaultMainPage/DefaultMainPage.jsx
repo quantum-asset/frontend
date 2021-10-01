@@ -21,7 +21,7 @@ const DefaultMainPage = (props) => {
         >
           <MenuIcon />
         </IconButton>
-        <SideBarButton></SideBarButton>
+       
       </TopBar>
       <MainPageHeader />
       {children}
