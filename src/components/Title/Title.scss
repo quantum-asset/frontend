@@ -1,0 +1,8 @@
+.quantum-main-title {
+  font-size: 2rem;
+  font-weight: 500;
+  @media (max-width: 600px) {
+    position: relative;
+    font-size: 1.5rem;
+  }
+}

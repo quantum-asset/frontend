@@ -18,7 +18,7 @@ const SideBarButton = (props) => {
   };
   return (
     <div
-      className="main-side-bar-button"
+      className={`main-side-bar-button${!active?" no-active":""}`}
       onClick={handleClick}
       style={active ? buttonStyles.active : buttonStyles.notActive}
     >

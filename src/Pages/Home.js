@@ -12,14 +12,17 @@ const Home = (props) => {
     // props.history.push("/" + move_to);
     props.history.push("/template");
   }
+  const iniciarSesion = () => {
+    props.history.push("/activos");
+  };
   return (
     <div className="home-root">
       <div className="logo-background">
         <img
           src={"https://terpel.pe/web/images/terpel2-landing.png"}
-         // width="100%"
+          // width="100%"
           alt="logo-login-background"
-         className="image-background"
+          className="image-background"
         />
       </div>
       <div className="grey-background"></div>
@@ -34,7 +37,7 @@ const Home = (props) => {
               // Cancel the default action, if needed
               event.preventDefault();
               // Trigger the button element with a click
-              //iniciarSesion();
+              iniciarSesion();
             }
           }}
           fullWidth
@@ -54,7 +57,7 @@ const Home = (props) => {
               // Cancel the default action, if needed
               event.preventDefault();
               // Trigger the button element with a click
-              //iniciarSesion();
+              iniciarSesion();
             }
           }}
           fullWidth
@@ -69,7 +72,7 @@ const Home = (props) => {
         />
         <button
           className="anchor"
-          style={{ alignSelf: "flex-end" }}
+          style={{ alignSelf: "flex-end", margin: "10px 0" }}
           //onClick={handleOpenDialog}
           onClick={() => {}}
         >
@@ -82,7 +85,7 @@ const Home = (props) => {
           variant="contained"
           fullWidth
           //onClick={iniciarSesion}
-          onClick={() => {props.history.push("/template")}}
+          onClick={iniciarSesion}
         >
           Iniciar Sesion
         </Button>

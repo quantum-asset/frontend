@@ -1,52 +1,25 @@
-import { useState } from "react";
+
 import "./App.css";
 import Wrapper from "./components/Wrapper/Wrapper";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import { useUserValue } from "./context/Sesion";
 import Home from "./Pages/Home";
-import DetailTemplate from "./Pages/DetailTemplate";
+import AssetRouter from "./AssetRouter";
 
-function App() {
-  const [{ usuario, auth }, dispatch] = useUserValue();
 
- 
+function App(props) {
+//  const [{ usuario, auth }, dispatch] = useUserValue();
+console.log("APP:", props);
+  
   return (
     <Wrapper>
       <BrowserRouter>
-        <Route
-          exact
-          path="/"
-          component={(props) => (
-            <Home {...props} />
-          )}
-        />
-         <Route
-          exact
-          path="/template"
-          component={(props) => (
-            <DetailTemplate {...props} />
-          )}
-        />
+        <Route exact path="/" component={(props) => <Home {...props} />} />
+        <Route path="*" component={(props) => <AssetRouter {...props} />} />
       </BrowserRouter>
-
-     
     </Wrapper>
   );
 }
 
 export default App;
-/*  <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>    <NavBar/>*/

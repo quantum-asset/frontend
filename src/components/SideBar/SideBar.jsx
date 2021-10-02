@@ -15,7 +15,7 @@ const SideBar = (props) => {
         {children}
       </div>
 
-      <div className="main-side-bar-logout">
+      <div className="main-side-bar-logout" onClick={()=>{props.history.push("/")}}>
         {" "}
         <IconButton
           style={{color:"white"}}
