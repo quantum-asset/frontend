@@ -16,7 +16,6 @@ const AssetPage = (props) => {
         labels={["Activos fijos", "Tipos de activos"]}
         content={[
           <Fragment>
-         
             <Grid
               container
               style={{
@@ -24,9 +23,9 @@ const AssetPage = (props) => {
                 padding: "10px",
                 borderRadius: "10px",
               }}
-            >   <h4>
-              Filtros{" "}
-              </h4>
+            >
+              {" "}
+              <h4>Filtros </h4>
               <Grid item md={12} container spacing={2}>
                 <Grid item md={3} xs={12}>
                   {/* <div style={{ marginBottom: "5px" }}>Tag:</div> */}
@@ -39,6 +38,8 @@ const AssetPage = (props) => {
                     autoComplete="current-password"
                     variant="outlined"
                     style={{ margin: "4px 0px" }}
+                    size="small"
+
                     // onChange={ingresoDeCorreooo}
                     // value={usuarioLogin.email}
                   />
@@ -52,6 +53,7 @@ const AssetPage = (props) => {
                     type="search"
                     autoComplete="current-password"
                     variant="outlined"
+                    size="small"
                     // onChange={ingresoDeCorreooo}
                     // value={usuarioLogin.email}
                     style={{ margin: "4px 0px" }}
@@ -65,6 +67,7 @@ const AssetPage = (props) => {
                     type="search"
                     autoComplete="current-password"
                     variant="outlined"
+                    size="small"
                     // onChange={ingresoDeCorreooo}
                     // value={usuarioLogin.email}
                     style={{ margin: "4px 0px" }}
@@ -73,6 +76,7 @@ const AssetPage = (props) => {
                 <Grid item md={3} xs={12}>
                   {/*  <div style={{ marginBottom: "5px" }}>Locación:</div> */}
                   <Autocomplete
+                    size="small"
                     id="combo-box-paciente"
                     options={proveedores}
                     getOptionLabel={(option) => `${option.nombre}`}
@@ -83,6 +87,7 @@ const AssetPage = (props) => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
+                        size="small"
                         label="Locacion"
                         variant="outlined"
                       />
@@ -95,6 +100,7 @@ const AssetPage = (props) => {
                   {/*  <div style={{ marginBottom: "5px" }}>Locación:</div> */}
                   <Autocomplete
                     id="combo-box-paciente"
+                    size="small"
                     options={proveedores}
                     getOptionLabel={(option) => `${option.nombre}`}
                     style={{ width: "100%", margin: "4px 0px" }}
@@ -119,6 +125,7 @@ const AssetPage = (props) => {
                     label="Fecha"
                     type="date"
                     fullWidth
+                    size="small"
                     // defaultValue={date}
                     //value={date}
                     // onChange={(e) => handleChangeDate(e)}
@@ -146,8 +153,8 @@ const AssetPage = (props) => {
                 <TableCheckBox />
               </div>
 
-              <div style={{ width: "25%" }}>
-                <Paper>Charts</Paper>
+              <div style={{ width: "25%", height: "100%" }}>
+                <Paper style={{ height: "100%" }}>Charts</Paper>
               </div>
             </div>
           </Fragment>,
