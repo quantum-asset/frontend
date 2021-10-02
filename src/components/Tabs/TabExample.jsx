@@ -17,19 +17,15 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <div >
           <Typography>{children}</Typography>
-        </Box>
+        </div>
       )}
     </div>
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+
 
 function a11yProps(index) {
   return {
@@ -38,7 +34,7 @@ function a11yProps(index) {
   };
 }
 
-export default function Tabs(props) {
+export default function TabExample(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -46,7 +42,7 @@ export default function Tabs(props) {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%' , height:"100%",backgroundColor:"black"}}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Item One" {...a11yProps(0)} />
