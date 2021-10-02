@@ -172,7 +172,7 @@ for (let i = 0; i < 200; i += 1) {
   rows.push(createData(i, ...randomSelection));
 }
 
-export default function ReactVirtualizedTable() {
+export default function TableVirtualized() {
   return (
     <Paper style={{ height: 400, width: '100%' }}>
       <VirtualizedTable
