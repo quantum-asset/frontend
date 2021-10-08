@@ -1,10 +1,14 @@
 import { IconButton } from "@mui/material";
 import React from "react";
-import logo from "./../../static/logo-h-nb.png";
+import logo from "./../../static/logo-h-nb3.png";
 import "./SideBarMobile.scss";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Close } from "@material-ui/icons";
+import { cerrarSesionRedux } from "../../context/actions/sesionAction";
+import { useUserValue } from "../../context/Sesion";
 const SideBarMobile = (props) => {
+  const [{ }, dispatch] = useUserValue();
+
   const { actions, open, onClose } = props;
   if (open)
     return (
@@ -28,7 +32,9 @@ const SideBarMobile = (props) => {
           {actions}
         </div>
 
-        <div className="side-bar-mobile-logout">
+        <div className="side-bar-mobile-logout" onClick={()=>{
+          cerrarSesionRedux(dispatch);
+          }}>
           {" "}
           <IconButton
             aria-label="upload picture"

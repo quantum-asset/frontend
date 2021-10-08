@@ -46,7 +46,9 @@ export const registrarse = (dispatch, newUser) => {
  *
  * @param {*} dispatch
  */
-export const cerrarSesion = (dispatch, dispatchBackdrop) => {
+export const cerrarSesionRedux = (dispatch
+  //, dispatchBackdrop
+  ) => {
   console.log("Logout llamado");
 
   try {

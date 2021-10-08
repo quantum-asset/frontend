@@ -4,14 +4,28 @@ import IconControl from "../../icons/IconControl";
 import IconDashBoard from "../../icons/IconDashBoard";
 import IconLocation from "../../icons/IconLocation";
 import IconRFID from "../../icons/IconRFID";
+import IconMaestros from "../../icons/IconMaestros";
 import IconUserManagement from "../../icons/IconUserManagement";
-export const sideBarOptions = [
-  { title:"Generación de Reportes",redirect: "/reportes", label: "Reportes" },
-  { title:"Gestión de Activos Fijos",redirect: "/activos", label: "Activos" },
-  { title:"Toma y control de inventarios",redirect: "/inventario", label: "Inventario" },
-  { title:"Gestión de Usuarios y Permisos",redirect: "/permisos", label: "Permisos" },
+export const sideBarOptions = (rol) => [
+  {
+    title: "Generación de Reportes",
+    redirect: `${rol}/reportes`,
+    label: "Reportes",
+  },
+  {
+    title: "Gestión Tablas maestras",
+    redirect: `${rol}/mantenimientos-maestros`,
+    label: "Maestros",
+  },
+  {
+    title: "Toma y control de inventarios",
+    redirect: `${rol}/inventario`,
+    label: "Inventario",
+  },
+  /*  { title:"Gestión de Usuarios y Permisos",redirect: "/permisos", label: "Permisos" },
   { title:"Gestión de Consumibles RFID",redirect: "/tags", label: "Tags RFID" }, //alertas
   { title:"Gestión de Locaciones",redirect: "locaciones", label: "Locaciones" },
+  { title:"Gestión de Datos Maestros",redirect: "maestros", label: "Maestros" }, */
 ];
 const IconSelector = (props) => {
   const { label } = props;
@@ -28,6 +42,8 @@ const IconSelector = (props) => {
       return <IconRFID {...props} />;
     case "Locaciones":
       return <IconLocation {...props} />;
+    case "Maestros":
+      return <IconMaestros {...props} />;
     default:
       <IconDashBoard {...props} />;
   }

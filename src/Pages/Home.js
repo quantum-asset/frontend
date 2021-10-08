@@ -1,25 +1,64 @@
 import { Button, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useUserValue } from "../context/Sesion";
 import "./Home.scss";
-import logo from "../static/logo-h-nb.png";
+import logo from "../static/logo-h-nb3.png";
+import { FAKELOGIN } from "../fakeServer/FAKELOGIN";
+import {
+  cerrarSesionRedux,
+  iniciarSesionRedux,
+} from "../context/actions/sesionAction";
 const Home = (props) => {
   const [{ usuario, auth }, dispatch] = useUserValue();
+  const [usuarioLogin, setUsuariologin] = useState({ email: "jin@kamui.com", password: "1234" });
+
   if (auth) {
     console.log("L Usuario", usuario, auth);
     //const move_to = usuario.rol.nombre.toLowerCase();
 
     // props.history.push("/" + move_to);
-    props.history.push("/template");
+    //props.history.push("/mantenimientos-maestros");
+    const { ROL } = usuario;
+      switch (ROL) {
+        case "Encargado control de activos":
+          props.history.push("/encargado-control-activos");
+          break;
+        case "Encargado registro de activos":
+          props.history.push("/encargado-registro-activos");
+          break;
+
+        case "Encargado de toma de inventario":
+          props.history.push("/encargado-toma-inventario");
+          break;
+
+        default: {
+          alert(
+            "Ocurrio un error al iniciar sesión, o no tiene permisos suficientes. Porfavor contacte al administrador del sistema"
+          );
+          cerrarSesionRedux(dispatch);
+          break;
+        }
+      }
   }
-  const iniciarSesion = () => {
-    props.history.push("/activos");
+  const iniciarSesion = async () => {
+    const response = await FAKELOGIN(usuarioLogin.email, usuarioLogin.password);
+    console.log("respose login", response);
+    if (!response || response.status !== "ok") {
+      alert(response.message);
+    } else {
+      alert(response.message);
+      iniciarSesionRedux(dispatch, response.payload);
+      
+      //props.history.push("/mantenimientos-maestros");
+    }
   };
   return (
     <div className="home-root">
       <div className="logo-background">
         <img
-          src={"https://terpel.pe/web/images/terpel2-landing.png"}
+          src={
+            "https://user-images.githubusercontent.com/43678736/135766091-1585f7a5-d5f0-4701-8acb-d179b166e0af.jpg"
+          }
           // width="100%"
           alt="logo-login-background"
           className="image-background"
@@ -47,8 +86,10 @@ const Home = (props) => {
           type="email"
           autoComplete="current-password"
           variant="outlined"
-          //onChange={ingresoDeCorreooo}
-          //value={usuarioLogin.email}
+          onChange={(e) => {
+            setUsuariologin({ ...usuarioLogin, email: e.target.value });
+          }}
+          value={usuarioLogin.email}
         />
 
         <TextField
@@ -67,8 +108,10 @@ const Home = (props) => {
           type="password"
           autoComplete="current-password"
           variant="outlined"
-          //onChange={handleChangePassword}
-          // value={usuarioLogin.password}
+          onChange={(e) => {
+            setUsuariologin({ ...usuarioLogin, password: e.target.value });
+          }}
+          value={usuarioLogin.password}
         />
         <button
           className="anchor"
