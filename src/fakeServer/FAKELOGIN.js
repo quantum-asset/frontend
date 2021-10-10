@@ -9,11 +9,11 @@ export const UserMOCK = {
   APELLIDO_MATERNO: "RAMIREZ",
   TIPO_DOCUMENTO_IDENTIDAD: "DNI",
   NUM_DOCUMENTO_IDENTIDAD: "23877900",
-
   ROL: "Encargado control de activos",
   LOCACION: "ESTACIÓN CENTRAL",
   PERMISOS: ["GESTION_MAESTROS", "REPORTES", "CONTROL_ACTIVOS"],
 };
+
 export const FAKELOGIN = (correo, password) => {
   return new Promise((resolve, reject) => {
     if (

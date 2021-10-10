@@ -31,9 +31,8 @@ ReactDOM.render(
           reducer={openBackDropReducer}
         >
           <ThemeProvider theme={mainTheme}>
-             <App />
+            <App />
           </ThemeProvider>
-         
         </BackDropProvider>
       </DialogProviderSSJ>
     </UserProvider>

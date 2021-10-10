@@ -9,7 +9,7 @@ const proveedores = [
   { id: 3, nombre: "ZEBRA" },
   { id: 4, nombre: "PUCP" },
 ];
-const AssetPage = (props) => {
+const AssetPage = (props) => { 
   return (
     <Fragment>
       <AssetTabs

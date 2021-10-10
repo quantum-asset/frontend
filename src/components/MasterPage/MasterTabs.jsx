@@ -15,12 +15,12 @@ function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
-      style={{ padding: "20px" }}
+      style={{height:"calc(100vh - 159px)" }}
     >
       {value === index && (
-        <div>
-          <Typography>{children}</Typography>
-        </div>
+        
+          <div style={{height:"100%",width:"100%"}}>{children}</div>
+        
       )}
     </div>
   );
@@ -42,7 +42,7 @@ export default function MasterTabs(props) {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100%", backgroundColor: "#c4c4c4" }}>
+    <Box sx={{ width: "100%", height: "calc(100vh - 70px)", backgroundColor: "#c4c4c4" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}

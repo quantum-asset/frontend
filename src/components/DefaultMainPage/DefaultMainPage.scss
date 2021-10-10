@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  //min-height: 100vh;
+  overflow: auto;
+  //margin-bottom: 15px;
   .avatar-menu {
     display: flex;
     align-items: center;

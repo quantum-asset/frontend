@@ -22,10 +22,6 @@ export const sideBarOptions = (rol) => [
     redirect: `${rol}/inventario`,
     label: "Inventario",
   },
-  /*  { title:"Gestión de Usuarios y Permisos",redirect: "/permisos", label: "Permisos" },
-  { title:"Gestión de Consumibles RFID",redirect: "/tags", label: "Tags RFID" }, //alertas
-  { title:"Gestión de Locaciones",redirect: "locaciones", label: "Locaciones" },
-  { title:"Gestión de Datos Maestros",redirect: "maestros", label: "Maestros" }, */
 ];
 const IconSelector = (props) => {
   const { label } = props;

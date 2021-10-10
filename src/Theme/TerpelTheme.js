@@ -8,19 +8,19 @@ export const theme = {
   textColor2: "#fff",
   grey: "#EAEEF3",
 }; */
- const mainTheme = createMuiTheme({
+const mainTheme = createMuiTheme({
   palette: {
     primary: {
-      light: "#ff605a",
-      main: "#FF1E0A",
-      dark: "#ff605a",
-      contrastText: "#eeeeee",
+      //light: "#861616",
+      main: "#861616",
+     // dark: "#861616",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      light: "#51d1f6",
-      main: "#20C0F3",
-      dark: "#15558D",
-      contrastText: "#EDF5E1",
+      light: "#861616",
+      main: "#861616",
+      dark: "#861616",
+      contrastText: "#861616",
       //contrastText: "#09DCA4",
     },
   },

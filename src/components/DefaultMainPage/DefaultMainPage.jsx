@@ -3,12 +3,9 @@ import Avatar from "@mui/material/Avatar";
 
 import TopBar from "../TopBar/TopBar";
 import "./DefaultMainPage.scss";
-import MainPageHeader from "./MainPageHeader";
 import MenuIcon from "@material-ui/icons/Menu";
 import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import SideBarButton from "../SideBar/SideBarButton";
-import IconAssets from "../../icons/IconAssets";
-import IconDashBoard from "../../icons/IconDashBoard";
+
 import Title from "../Title/Title";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -112,7 +109,7 @@ const DefaultMainPage = (props) => {
           </Menu>
         </span>
       </TopBar>
-    
+
       {children}
     </div>
   );

@@ -7,11 +7,10 @@ import MasterTabs from "../components/MasterPage/MasterTabs";
 import { useUserValue } from "../context/Sesion";
 
 const Maestros = (props) => {
-   const [{auth}, ]=useUserValue();
-  if(!auth){
+  const [{ auth }] = useUserValue();
+  if (!auth) {
     props.history.push("/");
-
-  } 
+  }
   return (
     <Fragment>
       <MasterTabs

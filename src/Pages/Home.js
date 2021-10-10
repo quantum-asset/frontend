@@ -13,11 +13,12 @@ const Home = (props) => {
   const [usuarioLogin, setUsuariologin] = useState({ email: "jin@kamui.com", password: "1234" });
 
   if (auth) {
-    console.log("L Usuario", usuario, auth);
+    console.log("L Usuario", usuario, auth,props);
     //const move_to = usuario.rol.nombre.toLowerCase();
 
     // props.history.push("/" + move_to);
     //props.history.push("/mantenimientos-maestros");
+
     const { ROL } = usuario;
       switch (ROL) {
         case "Encargado control de activos":
