@@ -16,7 +16,9 @@ import axios from "axios";
 import sesionReducer from "./context/reducers/sesionReducer";
 import { BackDropProvider } from "./context/backdrop";
 import { ThemeProvider } from "@material-ui/styles";
+import {ThemeProvider as MuiThemeProvider} from "@mui/material/styles";
 import mainTheme from "./Theme/TerpelTheme";
+import MUImainTheme from "./Theme/MuiTheme";
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
 
 ReactDOM.render(
@@ -30,9 +32,12 @@ ReactDOM.render(
           initialState={EstadoInicialBackDrop}
           reducer={openBackDropReducer}
         >
-          <ThemeProvider theme={mainTheme}>
+          <MuiThemeProvider theme={MUImainTheme}>
+              <ThemeProvider theme={mainTheme}>
             <App />
           </ThemeProvider>
+          </MuiThemeProvider>
+        
         </BackDropProvider>
       </DialogProviderSSJ>
     </UserProvider>

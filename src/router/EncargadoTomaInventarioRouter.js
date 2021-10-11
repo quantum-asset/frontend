@@ -14,7 +14,7 @@ import DefaultMainPage from "../components/DefaultMainPage/DefaultMainPage";
 import Maestros from "../Pages/Maestros";
 
 const EncargadoTomaInventarioRouter = (props) => {
-  const [{ usuario, auth }] = useUserValue();
+  const [{  auth }] = useUserValue();
   //const { ROL } = usuario;
   if (!auth) {
     props.history.push("/");

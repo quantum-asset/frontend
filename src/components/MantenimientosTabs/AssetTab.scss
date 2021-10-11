@@ -9,17 +9,18 @@
   .left-side {
     //background-color: aliceblue;
     //margin: auto;
+   // height: 100%;
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 90%;
+    min-height: 100%;
   }
   .right-side {
     //background-color: burlywood;
     width: 28%;
-    height: 90%;
+    height: 10%;
 
     //margin: auto;
 
@@ -29,14 +30,19 @@
 
   @media (max-width: 960px) {
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     .left-side {
       //flex-grow: 1;
       width: 100%;
+      min-height: 0%;
     }
     .right-side {
-     // flex-grow: 1;
-     width: 100%;
+      // flex-grow: 1;
+      margin: 20px 0;
 
+      min-height: 0%;
+      width: 100%;
     }
   }
 }

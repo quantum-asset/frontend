@@ -3,8 +3,10 @@ import React, { Fragment, useState } from "react";
 import Title from "../Title/Title";
 import AssetTable from "./Assets/AssetTable";
 import "./AssetTab.scss";
-import RightTable from "./common/RightTable";
 import SearchBar from "./common/SearchBar";
+import JTableSSJ from "../JMaterialTable/JTableSSJ";
+import TypeTableList from "./TypeTableList/TypeTableList";
+import ChartSummary from "./ChartSummary/ChartSummary";
 const AssetTab = (props) => {
   const [busqueda, setBusqueda] = useState({ avanzada: false, filtros: [] });
   const handleChangeBusqueda = (nuevaBusqueda) => {
@@ -13,17 +15,20 @@ const AssetTab = (props) => {
   };
   return (
     <Fragment>
-      <Title title={"Gestión de Activos Fijos"} />
+      <Title subTitle={"Gestión de Activos Fijos"} />
       <div className="main-asset-tab-container">
         <div className="left-side">
           <SearchBar
             onChangeBusqueda={handleChangeBusqueda}
             busqueda={busqueda}
           />
-          <AssetTable/>
+          {/* <JTableSSJ rows={[]} columns={[]} /> */}
+          <AssetTable />
         </div>
         <div className="right-side">
-          <RightTable />
+          <TypeTableList />
+          <ChartSummary/>
+          {/* <RightTable /> */}
         </div>
       </div>
     </Fragment>
