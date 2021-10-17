@@ -1,0 +1,17 @@
+export const USUARIO_X_PERMISO_MOCK = (
+  ID_USUARIO,
+  ID_PERMISO,
+  INICIO,
+  EXPIRACION,
+  FECHA_REGISTRO,
+  ESTADO
+) => {
+  return {
+    ID_USUARIO,
+    ID_PERMISO,
+    INICIO,
+    EXPIRACION,
+    FECHA_REGISTRO,
+    ESTADO
+  };
+};

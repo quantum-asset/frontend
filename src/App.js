@@ -9,10 +9,13 @@ import {
   EncargadoControlRouter,
   EncargadoRegistroActivosRouter,
 } from "./router";
+import { useIsOnlineValue } from "./context/isOnline";
 
 function App(props) {
   const [{ usuario, auth }, dispatch] = useUserValue();
-  console.log("APP:", usuario, auth,props);
+  const mode = useIsOnlineValue();
+  console.log("Is online", mode);
+  console.log("APP:", usuario, auth, props);
   if (!auth) {
     const userRecover = reinitialize();
     if (userRecover) {

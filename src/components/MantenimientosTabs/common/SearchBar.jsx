@@ -146,7 +146,7 @@ const SearchBar = (props) => {
               onClick={handleBusquedaAvanzada}
             >
               {" "}
-              {"Búsqueda avanzada"}
+              {"Búsqueda avanzada >"}
             </div>
           </div>
         )}
@@ -245,7 +245,7 @@ const SearchBar = (props) => {
                 className="search-bar-busqueda-avanzada-label"
                 onClick={handleBusquedaSimple}
               >
-                {"Búsqueda simple"}
+                {"Búsqueda simple ^"}
               </div>
             </div>
           </Fragment>

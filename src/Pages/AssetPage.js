@@ -1,5 +1,5 @@
 import { Autocomplete, Grid, Paper, TextField } from "@mui/material";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import AssetTabs from "../components/AssetPage/AssetTabs";
 import TableCheckBox from "../components/Examples/TableCheckBox";
 const proveedores = [
@@ -9,7 +9,14 @@ const proveedores = [
   { id: 3, nombre: "ZEBRA" },
   { id: 4, nombre: "PUCP" },
 ];
-const AssetPage = (props) => { 
+const AssetPage = (props) => {
+  const initFOTO = async () => {
+    const response = await axios.get("http://localhost:8000/foto/1");
+    console.log("response foto", response);
+  };
+  useEffect(() => {
+    initFOTO();
+  }, []);
   return (
     <Fragment>
       <AssetTabs

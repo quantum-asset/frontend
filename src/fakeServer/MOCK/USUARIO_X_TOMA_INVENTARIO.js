@@ -1,0 +1,9 @@
+export const USUARIO_X_TOMA_INVENTARIO_MOCK = (
+  ID_USUARIO,
+  ID_TOMA_INVENTARIO
+) => {
+  return {
+    ID_USUARIO,
+    ID_TOMA_INVENTARIO,
+  };
+};

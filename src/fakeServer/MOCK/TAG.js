@@ -1,0 +1,19 @@
+export const TAG_MOCK = (
+  ID_TAG,
+  CODIGO,
+  ID_LOCACION,
+  ID_USUARIO,
+  FECHA_CREACION,
+  ULTIMA_MODIFICACION,
+  ESTADO
+) => {
+  return {
+    ID_TAG,
+    CODIGO,
+    ID_LOCACION,
+    ID_USUARIO,
+    FECHA_CREACION,
+    ULTIMA_MODIFICACION,
+    ESTADO,
+  };
+};

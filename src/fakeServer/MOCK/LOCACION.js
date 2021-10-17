@@ -1,0 +1,17 @@
+export const LOCACION_MOCK = (
+  ID_LOCACION,
+  ID_TIPO_LOCACION,
+  DENOMINACION,
+  DIRECCION,
+  DESCRIPCION = "-",
+  ESTADO = 1
+) => {
+  return {
+    ID_LOCACION,
+    ID_TIPO_LOCACION,
+    DENOMINACION,
+    DIRECCION,
+    DESCRIPCION,
+    ESTADO,
+  };
+};

@@ -1,5 +1,5 @@
 import { Typography } from "@material-ui/core";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Title from "../Title/Title";
 import AssetTable from "./Assets/AssetTable";
 import "./AssetTab.scss";
@@ -9,10 +9,25 @@ import TypeTableList from "./TypeTableList/TypeTableList";
 import ChartSummary from "./ChartSummary/ChartSummary";
 const AssetTab = (props) => {
   const [busqueda, setBusqueda] = useState({ avanzada: false, filtros: [] });
+  const [defaultSearchValue, setDefaultSearchValue] = useState("");
+  const [advanceSearchFilters, setAdvanceSearchFilters] = useState([]);
+  const [advanceSearchValues, setAdvanceSearchValues] = useState([]);
   const handleChangeBusqueda = (nuevaBusqueda) => {
     setBusqueda(nuevaBusqueda);
     console.log("AssetTab", nuevaBusqueda);
   };
+  useEffect(() => {
+    let filters = [
+      { label: "Número de tag", tipo: "input" },
+      { label: "Locación", tipo: "select", options: [] },
+    ];
+    setAdvanceSearchFilters(
+      filters.map((x, index) => {
+        return { ...x, ...{ index: index } };
+      })
+    );
+    setAdvanceSearchValues(filters.map(() => ""));
+  }, []);
   return (
     <Fragment>
       <Title subTitle={"Gestión de Activos Fijos"} />
@@ -27,7 +42,7 @@ const AssetTab = (props) => {
         </div>
         <div className="right-side">
           <TypeTableList />
-          <ChartSummary/>
+          <ChartSummary />
           {/* <RightTable /> */}
         </div>
       </div>

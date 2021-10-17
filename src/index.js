@@ -16,10 +16,19 @@ import axios from "axios";
 import sesionReducer from "./context/reducers/sesionReducer";
 import { BackDropProvider } from "./context/backdrop";
 import { ThemeProvider } from "@material-ui/styles";
-import {ThemeProvider as MuiThemeProvider} from "@mui/material/styles";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import mainTheme from "./Theme/TerpelTheme";
 import MUImainTheme from "./Theme/MuiTheme";
+import { IsOnlineProvider } from "./context/isOnline";
+import { createListOfTipoActivo, FakeDB } from "./fakeServer/fakeDB";
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
+
+const isOnlineMode = false;//it means it is offline
+
+const tipoActivos = FakeDB.listOfTipoActivos;
+const areaResponsables = FakeDB.listOfAreaResponsable;
+console.log("tipoActivos: ", tipoActivos);
+console.log("areaResponsables: ", areaResponsables);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -33,11 +42,13 @@ ReactDOM.render(
           reducer={openBackDropReducer}
         >
           <MuiThemeProvider theme={MUImainTheme}>
-              <ThemeProvider theme={mainTheme}>
-            <App />
-          </ThemeProvider>
+            <ThemeProvider theme={mainTheme}>
+              <IsOnlineProvider initialState={isOnlineMode}>
+                <App />
+              </IsOnlineProvider>
+              
+            </ThemeProvider>
           </MuiThemeProvider>
-        
         </BackDropProvider>
       </DialogProviderSSJ>
     </UserProvider>
