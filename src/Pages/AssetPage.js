@@ -10,13 +10,8 @@ const proveedores = [
   { id: 4, nombre: "PUCP" },
 ];
 const AssetPage = (props) => {
-  const initFOTO = async () => {
-    const response = await axios.get("http://localhost:8000/foto/1");
-    console.log("response foto", response);
-  };
-  useEffect(() => {
-    initFOTO();
-  }, []);
+ 
+  
   return (
     <Fragment>
       <AssetTabs

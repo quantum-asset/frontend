@@ -8,50 +8,62 @@ import {
   cerrarSesionRedux,
   iniciarSesionRedux,
 } from "../context/actions/sesionAction";
+import {
+  closeBackDropAction,
+  openBackDropAction,
+} from "../context/actions/backDropAction";
+import { useBackDropValue } from "../context/backdrop";
 const Home = (props) => {
   const [{ usuario, auth }, dispatch] = useUserValue();
-  const [usuarioLogin, setUsuariologin] = useState({ email: "jin@kamui.com", password: "1234" });
+  const [{}, dispatchBackdrop] = useBackDropValue();
+  const [usuarioLogin, setUsuariologin] = useState({
+    email: "jin@kamui.com",
+    password: "1234",
+  });
 
   if (auth) {
-    console.log("L Usuario", usuario, auth,props);
+    console.log("L Usuario", usuario, auth, props);
     //const move_to = usuario.rol.nombre.toLowerCase();
 
     // props.history.push("/" + move_to);
     //props.history.push("/mantenimientos-maestros");
 
     const { ROL } = usuario;
-      switch (ROL) {
-        case "Encargado control de activos":
-          props.history.push("/encargado-control-activos");
-          break;
-        case "Encargado registro de activos":
-          props.history.push("/encargado-registro-activos");
-          break;
+    switch (ROL) {
+      case "Encargado control de activos":
+        props.history.push("/encargado-control-activos");
+        break;
+      case "Encargado registro de activos":
+        props.history.push("/encargado-registro-activos");
+        break;
 
-        case "Encargado de toma de inventario":
-          props.history.push("/encargado-toma-inventario");
-          break;
+      case "Encargado de toma de inventario":
+        props.history.push("/encargado-toma-inventario");
+        break;
 
-        default: {
-          alert(
-            "Ocurrio un error al iniciar sesión, o no tiene permisos suficientes. Porfavor contacte al administrador del sistema"
-          );
-          cerrarSesionRedux(dispatch);
-          break;
-        }
+      default: {
+        alert(
+          "Ocurrio un error al iniciar sesión, o no tiene permisos suficientes. Porfavor contacte al administrador del sistema"
+        );
+        cerrarSesionRedux(dispatch);
+        break;
       }
+    }
   }
   const iniciarSesion = async () => {
+    openBackDropAction(dispatchBackdrop, "Iniciando sesión");
     const response = await FAKELOGIN(usuarioLogin.email, usuarioLogin.password);
+
     console.log("respose login", response);
     if (!response || response.status !== "ok") {
       alert(response.message);
     } else {
       alert(response.message);
       iniciarSesionRedux(dispatch, response.payload);
-      
+
       //props.history.push("/mantenimientos-maestros");
     }
+    closeBackDropAction(dispatchBackdrop);
   };
   return (
     <div className="home-root">

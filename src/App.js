@@ -10,8 +10,30 @@ import {
   EncargadoRegistroActivosRouter,
 } from "./router";
 import { useIsOnlineValue } from "./context/isOnline";
-
-function App(props) {
+import { Dropzone, FileItem } from "./@dropzone-ui";
+const App = (props) => {
+  const [files, setFiles] = useState([]);
+  const updateFiles = (incommingFiles) => {
+    //do something with the files
+    setFiles(incommingFiles);
+    //even your own upload implementation
+  };
+  const removeFile = (id) => {
+    setFiles(files.filter((x) => x.id !== id));
+  };
+  return (
+    <Dropzone
+      style={{ minWidth: "500px" }}
+      onChange={updateFiles}
+      value={files}
+    >
+      {files.map((file) => (
+        <FileItem {...file} onDelete={removeFile} preview info />
+      ))}
+    </Dropzone>
+  );
+};
+function App2(props) {
   const [{ usuario, auth }, dispatch] = useUserValue();
   const mode = useIsOnlineValue();
   console.log("Is online", mode);

@@ -23,22 +23,22 @@ const EncargadoControlRouter = (props) => {
   if (!auth) {
     props.history.push("/");
   }
-  const decodee =(buffer)=>{
-    var binary = '';
-    var bytes = new Uint8Array( buffer );
+  const decodee = (buffer) => {
+    var binary = "";
+    var bytes = new Uint8Array(buffer);
     var len = bytes.byteLength;
     for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode( bytes[ i ] );
+      binary += String.fromCharCode(bytes[i]);
     }
-    return 'data:' + "image/*" + ';' + "base64" + ',' + window.btoa( binary );
-  }
+    return "data:" + "image/*" + ";" + "base64" + "," + window.btoa(binary);
+  };
   const initFOTO = async () => {
-    const response = await axios.get("http://localhost:8000/foto/1");
+    /*  const response = await axios.get("http://localhost:8000/foto/1");
     console.log("response foto", response.data.payload[0].FOTO);
     const base64String = decodee(response.data.payload[0].FOTO.data);
     console.log("response base64String", JSON.stringify(base64String));
 
-    setFoto(base64String);
+    setFoto(base64String); */
   };
   useEffect(() => {
     initFOTO();
@@ -95,9 +95,9 @@ const EncargadoControlRouter = (props) => {
           }}
           label={currentLabel}
         >
-          {foto && (
+          {/*  {foto && (
             <img src={foto} height="150px" width="100%" alt="lalalala" />
-          )}
+          )} */}
           <Route
             exact
             path="/encargado-control-activos"

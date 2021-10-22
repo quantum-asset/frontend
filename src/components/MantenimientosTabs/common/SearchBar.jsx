@@ -1,5 +1,11 @@
-import { Button, Fab, InputAdornment, TextField } from "@material-ui/core";
-import React, { Fragment, useEffect, useState } from "react";
+import {
+  Button,
+  Fab,
+  Grid,
+  InputAdornment,
+  TextField,
+} from "@material-ui/core";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./SearchBar.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,6 +13,12 @@ import DownloadIcon from "@mui/icons-material/Download";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import MuiTextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import TemplateDialog from "../../../dialogs/TemplateDialog";
+import imgpreview from "../../../static/imgpreview.webp";
+import { FormLabel } from "@mui/material";
+import { FileItem, FullScreenPreview } from "@dropzone-ui/react";
+import { validateFile } from "../../../utils/validateFile";
+const maxFileSize = 1024000;
 const SearchBar = (props) => {
   const { busqueda, onChangeBusqueda } = props;
   console.log("WWW SearchBar", props);
@@ -14,6 +26,16 @@ const SearchBar = (props) => {
   const [lastStatusAvanzada, setLastStatusAvanzada] = useState(false);
   const [onFilter, setOnFilter] = useState([]);
   const [mode, setMode] = useState("");
+  const [openAssetDialog, setOpenAssetDialog] = useState(false);
+  const [openBulkLoadDialog, setBulkLoadDialog] = useState(false);
+  const inputRef = useRef(null);
+
+  const handlecloseAssetDialog = () => {
+    setOpenAssetDialog(false);
+  };
+  const handlecloseBulkLoadDialog = () => {
+    setBulkLoadDialog(false);
+  };
   function reportWindowSize() {
     //console.log("WWW", window.innerWidth);
     const W = window.innerWidth;
@@ -44,6 +66,24 @@ const SearchBar = (props) => {
   const handleBusquedaSimple = () => {
     onChangeBusqueda({ ...busqueda, ...{ avanzada: false } });
   };
+  /////////// DIALOG
+  const [fileImage, setFileImage] = useState(undefined);
+  const [imgSource, setImgSource] = useState(undefined);
+  const handleOnChangeInput = (evt) => {
+    let fileList = evt.target.files;
+    const localValidator = {
+      maxFileSize: maxFileSize,
+    };
+
+    let output = undefined;
+    output = validateFile(fileList[0], localValidator);
+
+    setFileImage(output);
+  };
+  function handleClick(e) {
+    let referenceInput = inputRef.current;
+    referenceInput?.click();
+  }
   return (
     <div className="main-search-bar-container">
       <div className="main-search-bar">
@@ -104,6 +144,9 @@ const SearchBar = (props) => {
             aria-label="add"
             size="small"
             style={{ margin: "1px" }}
+            onClick={() => {
+              setOpenAssetDialog(true);
+            }}
           >
             <AddIcon />
           </Fab>
@@ -185,11 +228,7 @@ const SearchBar = (props) => {
                 size="small"
                 style={{ margin: "0 5px" }}
                 // sx={{ width: 300 }}
-                InputAdornment={
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                }
+
                 renderInput={(params) => (
                   <MuiTextField
                     size="small"
@@ -251,6 +290,297 @@ const SearchBar = (props) => {
           </Fragment>
         )}
       </div>
+      <TemplateDialog
+        title={"Agregar / Editar Activo Fijo"}
+        open={openAssetDialog}
+        onClose={handlecloseAssetDialog}
+        onCancel={() => alert("cancel")}
+        onAccept={() => alert("Cambios guardados")}
+      >
+        <Grid container spacing={2}>
+          <Grid item md={5} xs={12}>
+            <FormLabel
+              component="legend"
+              style={{ fontSize: "1.1rem", color: "black", margin: "10px 0" }}
+            >
+              Informacion Crítica
+            </FormLabel>
+            <FormLabel component="legend">Denominación *</FormLabel>
+            <TextField
+              style={{ margin: "5px 0" }}
+              color="primary"
+              fullWidth
+              id="outlined-email-input"
+              // label={"Denominación *"}
+              placeholder="Denominación del activo"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">Tipo de activo</FormLabel>
+            <Autocomplete
+              fullWidth
+              disablePortal
+              id="combo-box-demo"
+              options={top100Films}
+              size="small"
+              style={{ margin: "5px 0" }}
+              renderInput={(params) => (
+                <MuiTextField
+                  size="small"
+                  type="search"
+                  variant="outlined"
+                  {...params}
+                  label="Tipo de activo"
+                  fullWidth
+                />
+              )}
+            />
+            <FormLabel component="legend">Locación</FormLabel>
+            <Autocomplete
+              fullWidth
+              disablePortal
+              id="combo-box-demo"
+              options={top100Films}
+              size="small"
+              style={{ margin: "5px 0" }}
+              renderInput={(params) => (
+                <MuiTextField
+                  size="small"
+                  type="search"
+                  variant="outlined"
+                  {...params}
+                  label="Locación"
+                  fullWidth
+                />
+              )}
+            />
+            <FormLabel component="legend">Tag RFID</FormLabel>
+            <Autocomplete
+              fullWidth
+              disablePortal
+              id="combo-box-demo"
+              options={top100Films}
+              size="small"
+              style={{ margin: "5px 0" }}
+              renderInput={(params) => (
+                <MuiTextField
+                  size="small"
+                  type="search"
+                  variant="outlined"
+                  {...params}
+                  label="Número de tag"
+                  fullWidth
+                />
+              )}
+            />
+            <FormLabel component="legend">Area Responsable *</FormLabel>
+            <Autocomplete
+              fullWidth
+              disablePortal
+              id="combo-box-demo"
+              options={top100Films}
+              size="small"
+              style={{ margin: "5px 0" }}
+              renderInput={(params) => (
+                <MuiTextField
+                  size="small"
+                  type="search"
+                  variant="outlined"
+                  {...params}
+                  label="Area Responsable"
+                  fullWidth
+                />
+              )}
+            />
+            <FormLabel
+              component="legend"
+              style={{ fontSize: "1.1rem", color: "black", margin: "10px 0" }}
+            >
+              Informacion General del Activo
+            </FormLabel>
+            <FormLabel component="legend">Marca</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              placeholder="Marca del activo"
+              variant="outlined"
+              size="small"
+            />
+
+            <FormLabel component="legend">Modelo</FormLabel>
+            <TextField
+              style={{ margin: "5px 0" }}
+              color="primary"
+              fullWidth
+              id="outlined-email-input"
+              placeholder="Modelo del activo"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">Color</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              placeholder="Color del activo"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item md={5} xs={12}>
+            <FormLabel
+              component="legend"
+              style={{ fontSize: "1.1rem", color: "black", margin: "10px 0" }}
+            >
+              Informacion de adquicisión
+            </FormLabel>
+            <FormLabel component="legend">Proveedor*</FormLabel>
+            <TextField
+              style={{ margin: "5px 0" }}
+              color="primary"
+              fullWidth
+              id="outlined-email-input"
+              //label={"RUC del proveedror*"}
+              placeholder="Ingrese la razon social del proveedor"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">RUC del proveedor*</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              //label={"RUC del proveedor *"}
+              placeholder="Ingrese el número de RUC"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">Num. de Guía de remisión*</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              //label={"RUC del proveedor *"}
+              placeholder="Ingrese el número de la guía de remisión"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">Num. de factura*</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              //label={"RUC del proveedor *"}
+              placeholder="Ingrese el número de factura"
+              variant="outlined"
+              size="small"
+            />
+            <FormLabel component="legend">Costo de adquisición*</FormLabel>
+            <TextField
+              color="primary"
+              style={{ margin: "5px 0" }}
+              fullWidth
+              id="outlined-email-input"
+              // label={"Denominación *"}
+              placeholder="Costo del activo en soles"
+              variant="outlined"
+              size="small"
+              InputProps={{
+                startAdornment: <p style={{ marginRight: "4px" }}> {"S/."} </p>,
+              }}
+            />
+          </Grid>
+          <Grid item md={2} xs={12}>
+            <FormLabel
+              component="legend"
+              style={{ fontSize: "1.1rem", color: "black", margin: "10px 0" }}
+            >
+              Foto del Activo
+            </FormLabel>
+
+            {fileImage ? (
+              <>
+                {" "}
+                <FileItem
+                  {...fileImage}
+                  localization="ES-es"
+                  preview
+                  hd
+                  info
+                  onDelete={() => {
+                    setFileImage(undefined);
+                  }}
+                  onSee={(src) => {
+                    setImgSource(src);
+                  }}
+                />
+                <FullScreenPreview
+                  imgSource={imgSource}
+                  openImage={imgSource}
+                  onClose={() => {
+                    setImgSource(undefined);
+                  }}
+                />
+              </>
+            ) : (
+              <div className="image-add-icon" onClick={handleClick}>
+                <input
+                  ref={inputRef}
+                  onChange={handleOnChangeInput}
+                  type="file"
+                  accept={"image/*"}
+                  style={{ display: "none" }}
+                />
+                <img height="100%" src={imgpreview} alt="preview" />
+                <FormLabel component="legend" style={{ marginBottom: "5px" }}>
+                  Haga click para buscar un archivo...
+                </FormLabel>
+              </div>
+            )}
+          </Grid>
+
+          <Grid item md={12} xs={12}>
+            <FormLabel component="legend" style={{ marginBottom: "5px" }}>
+              Características (max. 100 caracteres)
+            </FormLabel>
+
+            <TextField
+              style={{ margin: "5px 0" }}
+              color="primary"
+              fullWidth
+              id="outlined-email-input"
+              multiline
+              rows={2}
+              //label={"RUC del proveedror*"}
+              placeholder="Ingrese las características general del activo"
+              variant="outlined"
+              size="small"
+            />
+
+            <FormLabel component="legend" style={{ marginBottom: "5px" }}>
+              Observaciones (max. 100 caracteres)
+            </FormLabel>
+            <TextField
+              style={{ margin: "5px 0" }}
+              color="primary"
+              fullWidth
+              id="outlined-email-input"
+              multiline
+              rows={2}
+              //label={"RUC del proveedror*"}
+              placeholder="Ingrese las observaciones al activo"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+        </Grid>
+      </TemplateDialog>
     </div>
   );
 };
