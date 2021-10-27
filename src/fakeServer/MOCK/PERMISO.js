@@ -1,3 +1,0 @@
-export const PERMISO_MOCK = (ID_PERMISO, DENOMINACION) => {
-  return { ID_PERMISO, DENOMINACION };
-};

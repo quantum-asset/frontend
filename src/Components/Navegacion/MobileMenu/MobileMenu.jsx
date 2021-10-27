@@ -1,10 +1,10 @@
 import React from "react";
 
-const ReportsPage = props =>{
+const MobileMenu = props =>{
     return(
         <div>
         
         </div>
     )
 }
-export default ReportsPage;
+export default MobileMenu;

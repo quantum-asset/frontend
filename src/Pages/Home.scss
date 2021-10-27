@@ -1,8 +1,17 @@
-.home-root {
+.quantum-home {
   height: inherit;
   width: inherit;
   position: relative;
 
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  justify-content: center;
+  @media (max-width: 600px) {
+    align-items: center;
+  }
   .logo-background {
     position: absolute;
     top: 0;
@@ -11,7 +20,6 @@
     height: 100%;
     filter: blur(4px);
     overflow: hidden;
-   
   }
   .grey-background {
     position: absolute;
@@ -25,17 +33,7 @@
       rgba(0, 0, 0, 0.65)
     );
   }
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: flex-end;
-
-  justify-content: center;
-  @media (max-width: 600px) {
-    align-items: center;
-  }
-  .from-container {
+  .form-container {
     filter: blur(0px);
 
     margin: 8%;

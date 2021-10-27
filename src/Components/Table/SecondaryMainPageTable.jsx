@@ -1,10 +1,10 @@
 import React from "react";
 
-const ReportsPage = props =>{
+const SecondaryMainPageTable = props =>{
     return(
         <div>
         
         </div>
     )
 }
-export default ReportsPage;
+export default SecondaryMainPageTable;

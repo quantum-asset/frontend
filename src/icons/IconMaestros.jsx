@@ -6,7 +6,7 @@ const IconMaestros = (props) => {
   return (
     <svg
       id="Capa_1"
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
       height={`${size || 24}`}
       width={`${size || 24}`}
       fill={color || "#000000"}

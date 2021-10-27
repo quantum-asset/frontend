@@ -1,57 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./App";
+import App from "./Router/App";
 import reportWebVitals from "./reportWebVitals";
-import { DialogProviderSSJ } from "./context/dialog";
-import { UserProvider } from "./context/Sesion";
-import {
-  EstadoInicialUser,
-  EstadoInicialDialog,
-  EstadoInicialBackDrop,
-} from "./context/estadoInicial";
-import openDialogReducer from "./context/reducers/openDialogReducer";
-import openBackDropReducer from "./context/reducers/openBackDropReducer";
-import axios from "axios";
-import sesionReducer from "./context/reducers/sesionReducer";
-import { BackDropProvider } from "./context/backdrop";
 import { ThemeProvider } from "@material-ui/styles";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import mainTheme from "./Theme/TerpelTheme";
 import MUImainTheme from "./Theme/MuiTheme";
-import { IsOnlineProvider } from "./context/isOnline";
-import { createListOfTipoActivo, FakeDB } from "./fakeServer/fakeDB";
-axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
-
-const isOnlineMode = false;//it means it is offline
-
-const tipoActivos = FakeDB.listOfTipoActivos;
-const areaResponsables = FakeDB.listOfAreaResponsable;
-console.log("tipoActivos: ", tipoActivos);
-console.log("areaResponsables: ", areaResponsables);
-
+import mainTheme from "./Theme/MaterialTheme";
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider initialState={EstadoInicialUser} reducer={sesionReducer}>
-      <DialogProviderSSJ
-        initialState={EstadoInicialDialog}
-        reducer={openDialogReducer}
-      >
-        <BackDropProvider
-          initialState={EstadoInicialBackDrop}
-          reducer={openBackDropReducer}
-        >
-          <MuiThemeProvider theme={MUImainTheme}>
-            <ThemeProvider theme={mainTheme}>
-              <IsOnlineProvider initialState={isOnlineMode}>
-                <App />
-              </IsOnlineProvider>
-              
-            </ThemeProvider>
-          </MuiThemeProvider>
-        </BackDropProvider>
-      </DialogProviderSSJ>
-    </UserProvider>
+    <MuiThemeProvider theme={MUImainTheme}>
+      <ThemeProvider theme={mainTheme}>
+        <App />
+      </ThemeProvider>
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

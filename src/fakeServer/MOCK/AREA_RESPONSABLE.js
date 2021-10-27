@@ -1,6 +1,0 @@
-export const AREA_RESPONSABLE_MOCK = (ID_AREA_RESPONSABLE, DENOMINACION) => {
-  return {
-    ID_AREA_RESPONSABLE,
-    DENOMINACION,
-  };
-};

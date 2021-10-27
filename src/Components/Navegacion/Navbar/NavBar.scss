@@ -1,0 +1,6 @@
+.navbar-menu-icon {
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+  }
+}

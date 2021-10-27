@@ -5,7 +5,7 @@ const IconUserManagement = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      enable-background="new 0 0 24 24"
+      enableBackground="new 0 0 24 24"
       viewBox="0 0 24 24"
       height={`${size || 24}px`}
       width={`${size || 24}px`}

@@ -1,0 +1,7 @@
+.quantum-page-wrapper {
+  min-height: 100vh;
+  width: calc(100% - 90px);
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
