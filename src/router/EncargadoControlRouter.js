@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import Maestros from "../Pages/Maestros";
 import ReportsPage from "../Pages/ReportsPage";
 import InventoryPage from "./InventoryPage";
@@ -9,36 +9,56 @@ import MainWrapper from "../Components/MainWrapper/MainWrapper";
 import NavBar from "../Components/Navegacion/Navbar/NavBar";
 
 const EncargadoControlRouter = (props) => {
+  const [navBarTitle, setNavBarTtle] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleChangeTitle = (newTitle) => {
+    setNavBarTtle(newTitle);
+  };
+  const handleCloseMobileMenu = (value) => {
+    setOpen(value);
+  };
   return (
     <MainWrapper>
       <SideBar
-        openMobileMenu={true}
+        openMobileMenu={open}
         base="encargado-control-activos"
         {...props}
-      />{" "}
+        onChangeMobileMenu={handleCloseMobileMenu}
+      />
       <PageWrapper>
-        <NavBar/>
+        <NavBar
+          title={navBarTitle}
+          onChangeMobileMenu={handleCloseMobileMenu}
+        />
         <Route
           exact
           path="/encargado-control-activos"
-          component={(props) => <Maestros {...props} />}
+          component={(props) => (
+            <Maestros {...props} setNavBarTitle={handleChangeTitle} />
+          )}
         />
 
         <Route
           exact
           path="/encargado-control-activos/mantenimientos-maestros"
-          component={(props) => <Maestros {...props} />}
+          component={(props) => (
+            <Maestros {...props} setNavBarTitle={handleChangeTitle} />
+          )}
         />
 
         <Route
           exact
           path="/encargado-control-activos/reportes"
-          component={(props) => <ReportsPage {...props} />}
+          component={(props) => (
+            <ReportsPage {...props} setNavBarTitle={handleChangeTitle} />
+          )}
         />
         <Route
           exact
           path="/encargado-control-activos/inventario"
-          component={(props) => <InventoryPage {...props} />}
+          component={(props) => (
+            <InventoryPage {...props} setNavBarTitle={handleChangeTitle} />
+          )}
         />
       </PageWrapper>
     </MainWrapper>

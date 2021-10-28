@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
+
 
 const ReportsPage = props =>{
+    const {setNavBarTitle} = props;
+    useEffect(()=>{
+      setNavBarTitle?.("Gestión de reportes");
+    },[]);
     return(
-        <div>
-        
-        </div>
+        <Fragment>
+        REPORTESSS
+        </Fragment>
     )
 }
 export default ReportsPage;

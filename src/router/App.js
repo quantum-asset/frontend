@@ -4,6 +4,7 @@ import EncargadoControlRouter from "./EncargadoControlRouter";
 import EncargadoRegistroActivosRouter from "./EncargadoRegistroActivosRouter";
 import EncargadoTomaInventarioRouter from "./EncargadoTomaInventarioRouter";
 import "../styles/App.scss";
+
 function App() {
   return (
     <Router>

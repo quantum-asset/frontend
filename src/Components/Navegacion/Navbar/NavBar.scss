@@ -4,3 +4,8 @@
     display: block;
   }
 }
+.navbar-title{
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
+}

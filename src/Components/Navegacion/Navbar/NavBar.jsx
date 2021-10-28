@@ -9,7 +9,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import "./NavBar.scss";
+import { YELLOW } from "../../../Theme/MainColors";
 export default function NavBar(props) {
+  const { title, onChangeMobileMenu } = props;
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -24,26 +26,38 @@ export default function NavBar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleOpenMobileMenu = () => {
+    onChangeMobileMenu?.(true);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="relative" style={{ backgroundColor: "whitesmoke" , color:"black"}}>
+      <AppBar
+        position="relative"
+        style={{
+          backgroundColor: "whitesmoke",
+          color: "black",
+          height: "65px",
+          borderBottom: "7px solid " + YELLOW,
+        }}
+      >
         <Toolbar variant="dense">
-         
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            className="navbar-menu-icon"
-          >
-            <MenuIcon />
-          </IconButton>
+          <div className="navbar-menu-icon">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleOpenMobileMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
 
-         {/*  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {/*  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Photos
           </Typography> */}
-          <h2 style={{flexGrow: 1}}>
-              Gestion de tablas maestras
+          <h2 className="navbar-title" style={{ flexGrow: 1 }}>
+            {title}
           </h2>
           {/** SPACE */}
 
@@ -78,8 +92,8 @@ export default function NavBar(props) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+            <MenuItem onClick={handleClose}>Cerrar Sesion</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

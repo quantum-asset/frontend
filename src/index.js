@@ -6,6 +6,12 @@ import { ThemeProvider } from "@material-ui/styles";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import MUImainTheme from "./Theme/MuiTheme";
 import mainTheme from "./Theme/MaterialTheme";
+import dotenv from "dotenv";
+import axios from "axios";
+dotenv.config();
+axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
+//axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
+
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={MUImainTheme}>

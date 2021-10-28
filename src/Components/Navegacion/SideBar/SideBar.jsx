@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./SideBar.scss";
 import logo from "./../../../Static/terpelisimo-logo-white3.png";
 import logoMobile from "./../../../Static/logo-h-nb3.png";
@@ -12,10 +12,14 @@ import SideBarMobileButton from "./SideBarMobileButton";
 
 const SideBar = (props) => {
   const myOptions = sideBarOptions(props.base) || [];
-  const { onClose, openMobileMenu } = props;
+  const { openMobileMenu, onChangeMobileMenu } = props;
   const [activePage, setActivePage] = useState(1);
   //const [open, setOpen] = useState(true);
   const [currentLabel, setCurrentLabel] = useState(myOptions[1].title);
+  const [localOpenMobileMenu, setLocalOpenMobileMenu] = useState(false);
+  useEffect(() => {
+    setLocalOpenMobileMenu(openMobileMenu);
+  }, [openMobileMenu]);
 
   const handleChangeCurrentLable = (newLabel) => {
     setCurrentLabel(newLabel);
@@ -77,9 +81,11 @@ const SideBar = (props) => {
         </div>
       </div>
       {/** MOBILE MENU */}
-      {openMobileMenu && (
-        <div className="main-side-bar-mobile-container">
-          <div className="main-side-bar-mobile">
+      {localOpenMobileMenu && (
+        <div className="main-side-bar-mobile-container" onClick={() => {
+          onChangeMobileMenu?.(false);
+        }}>
+          <div className="main-side-bar-mobile"onClick={(e)=>{e.preventDefault()}}>
             <div className="side-bar-mobile-actions">
               <div className="image-container-mobile">
                 <img src={logoMobile} height="50px" alt="logo-terpelisimo" />
@@ -89,7 +95,7 @@ const SideBar = (props) => {
                   component="span"
                   size="medium"
                   onClick={() => {
-                    onClose?.();
+                    onChangeMobileMenu?.(false);
                   }}
                 >
                   <Close
@@ -105,7 +111,7 @@ const SideBar = (props) => {
                     handleChangeCurrentLable(title);
 
                     props.history.push(`/${redirect}`);
-
+                    onChangeMobileMenu?.(false);
                     //setOpen(false);
                   }}
                 >
@@ -138,6 +144,7 @@ const SideBar = (props) => {
               <div> Cerrar Sesión</div>
             </div>
           </div>
+          <div className="layer-side-bar-mobile"></div>
         </div>
       )}
     </Fragment>

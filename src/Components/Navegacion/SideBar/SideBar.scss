@@ -57,13 +57,14 @@
 }
 /////////////
 .main-side-bar-mobile-container {
-  background-color: rgba(95, 24, 24, 0.5);
+  background-color: rgba(32, 10, 10, 0.5);
   width: 0px;
   height: 100%;
   //min-height: 520px;
   position: absolute;
   left: 0;
   top: 0;
+  cursor: pointer;
   @media (max-width: 600px) {
     width: 100%;
   }
