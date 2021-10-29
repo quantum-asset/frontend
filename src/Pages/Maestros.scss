@@ -1,0 +1,31 @@
+.tab-panel-maestros {
+  display: flex;
+  //width: 100%;
+  flex-direction: row;
+  padding: 10px 2%;
+  // height: 100%;
+  width: calc(100% - 90px);
+  //min-height: calc(100% - 220px);
+  background-color: transparent;
+  .left-side {
+    //background-color: rgb(255, 255, 255);
+    width: 70%;
+    margin: 1% 2%;
+  }
+  .right-side {
+    // background-color: rgb(99, 50, 50);
+    margin: 1% 2%;
+    width: 30%;
+  }
+  @media (max-width: 600px) {
+    width: calc(100% - 40px);
+    flex-direction: column;
+    //padding: 10px;
+    .left-side {
+      width: 100%;
+    }
+    .right-side {
+      width: 100%;
+    }
+  }
+}

@@ -11,7 +11,8 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
 export default function ScrollDialog(props) {
-  const { open, onCancel, onSave, onAccept, onClose, title, body } = props;
+  const { open, onCancel, onSave, onAccept, onClose, title, body, children } =
+    props;
   //const [open, setOpen] = React.useState(false);
   //const [data, setData] = React.useState({});
   const handleClose = () => {
@@ -42,6 +43,7 @@ export default function ScrollDialog(props) {
         <DialogContent dividers={true}>
           <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
             {body ||
+              children ||
               [...new Array(50)]
                 .map(
                   () => `Cras mattis consectetur purus sit amet fermentum.

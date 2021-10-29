@@ -1,0 +1,16 @@
+.panel-activos-container {
+  width: 100%;
+  border-radius: 6px;
+  background-color: white;
+  margin-bottom: 15px;
+}
+.advanced-search-inputs {
+  margin-top: 5px;
+  //padding: 0 10px 10px 10px;
+  display: flex;
+  width: 98%;
+  flex-direction: row;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+}
