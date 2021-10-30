@@ -2,23 +2,39 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./Router/App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@material-ui/styles";
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+//import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import MUImainTheme from "./Theme/MuiTheme";
-import mainTheme from "./Theme/MaterialTheme";
+//import mainTheme from "./Theme/MaterialTheme";
 import dotenv from "dotenv";
 import axios from "axios";
+import { UserProvider } from "./Context/Sesion";
+import sesionReducer from "./Context/reducers/sesionReducer";
+import {
+  EstadoInicialBackDrop,
+  EstadoInicialUser,
+} from "./Context/estadoInicial";
+import { BackDropProvider } from "./Context/backdrop";
+import openBackDropReducer from "./Context/reducers/openBackDropReducer";
 dotenv.config();
-axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
+axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER_DEV;
 //axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
 
 ReactDOM.render(
   <React.StrictMode>
-    <MuiThemeProvider theme={MUImainTheme}>
-      <ThemeProvider theme={mainTheme}>
-        <App />
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <ThemeProvider theme={MUImainTheme}>
+      {/*  <ThemeProvider theme={mainTheme}> */}
+      <BackDropProvider
+        initialState={EstadoInicialBackDrop}
+        reducer={openBackDropReducer}
+      >
+        <UserProvider initialState={EstadoInicialUser} reducer={sesionReducer}>
+          <App />
+        </UserProvider>
+      </BackDropProvider>
+
+      {/* </ThemeProvider> */}
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

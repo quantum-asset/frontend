@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core";
+/* import { createTheme } from "@material-ui/core";
 
 const mainTheme = createTheme({
   palette: {
@@ -18,3 +18,4 @@ const mainTheme = createTheme({
   },
 });
 export default mainTheme;
+ */

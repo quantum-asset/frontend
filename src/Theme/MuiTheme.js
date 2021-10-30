@@ -1,20 +1,13 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
-const MUImainTheme = createTheme({
-    palette: {
-      primary: {
-        //light: "#861616",
-        main: "#861616",
-       // dark: "#861616",
-        contrastText: "#FFFFFF",
-      },
-      secondary: {
-        light: "#861616",
-        main: "#861616",
-        dark: "#861616",
-        contrastText: "#861616",
-        //contrastText: "#09DCA4",
-      },
+let MUImainTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#861616",
     },
-  });
-  export default MUImainTheme;
+    secondary: {
+      main: "#ffffff",
+    },
+  },
+});
+export default MUImainTheme;

@@ -4,11 +4,11 @@ import logo from "./../../../Static/terpelisimo-logo-white3.png";
 import logoMobile from "./../../../Static/logo-h-nb3.png";
 
 import LogoutIcon from "@mui/icons-material/Logout";
-import { IconButton } from "@material-ui/core";
 import IconSelector, { sideBarOptions } from "./SideBarOptions";
 import SideBarButton from "./SideBarButton";
-import { Close } from "@material-ui/icons";
+import { Close } from "@mui/icons-material";
 import SideBarMobileButton from "./SideBarMobileButton";
+import { IconButton } from "@mui/material";
 
 const SideBar = (props) => {
   const myOptions = sideBarOptions(props.base) || [];

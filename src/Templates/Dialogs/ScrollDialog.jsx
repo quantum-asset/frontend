@@ -11,8 +11,18 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
 export default function ScrollDialog(props) {
-  const { open, onCancel, onSave, onAccept, onClose, title, body, children } =
-    props;
+  const {
+    open,
+    onCancel,
+    onSave,
+    onAccept,
+    onClose,
+    title,
+    body,
+    children,
+    onlyAccept,
+    ...other
+  } = props;
   //const [open, setOpen] = React.useState(false);
   //const [data, setData] = React.useState({});
   const handleClose = () => {
@@ -33,6 +43,7 @@ export default function ScrollDialog(props) {
   return (
     <div>
       <Dialog
+      {...other}
         open={open}
         onClose={handleClose}
         scroll={"paper"}
@@ -80,7 +91,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                 <Button
                   startIcon={<CheckCircleOutlineOutlinedIcon />}
                   variant="contained"
-                  onClick={handleClose}
+                  onClick={handleAccept}
                 >
                   Aceptar
                 </Button>
@@ -88,9 +99,12 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Button variant="text" onClick={handleClose}>
-                Cancelar
-              </Button>
+              {!onlyAccept && (
+                <Button variant="text" onClick={handleClose}>
+                  Cancelar
+                </Button>
+              )}
+
               <Button variant="contained" onClick={handleClose}>
                 Aceptar
               </Button>

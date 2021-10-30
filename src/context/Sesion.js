@@ -50,6 +50,10 @@ export const getRol = () => {
   if (!sessionStorage.Sesion) return undefined;
   return JSON.parse( sessionStorage.Sesion ).rol.name;
 };
+/**
+ * Revisa ellocalstorage, generalmente en los refresh de pagina
+ * @returns El usuario, si había, en el local storage
+ */
 export const reinitialize = () => {
   let retrievedObject = sessionStorage.Sesion;
   if (!retrievedObject) return retrievedObject;

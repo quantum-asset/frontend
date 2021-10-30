@@ -1,34 +1,86 @@
 import React, { Fragment, useState } from "react";
 import MainWrapper from "../Components/MainWrapper/MainWrapper";
 import logo from "../Static/logo-h-nb3.png";
-import { Button, TextField } from "@material-ui/core";
+import { Button } from "@mui/material";
 import "./Home.scss";
 import ScrollDialog from "../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../Components/Formulario/FormInputText";
+import { AuthController } from "../Controller/loginController";
+import {  useUserValue } from "../Context/Sesion";
+import { iniciarSesionContext } from "../Context/actions/sesionAction";
+import {
+  closeBackDropAction,
+  openBackDropAction,
+} from "../Context/actions/backDropAction";
+import { useBackDropValue } from "../Context/backdrop";
 const Home = (props) => {
-  //LOGIN
+  //BACKDROP
+  const [, dispatchBackdrop] = useBackDropValue();
+
+  // VERIFICACION del CONTEXT
+  const [{ auth, usuario }, dispatch] = useUserValue();
+  if (auth) {
+    const rol = usuario;
+    props.history.push(`/encargado-control-activo`);
+  }
+
+  //////////////   LOGIN
   const [credenciales, setCredenciales] = useState({
-    CORREO: "",
-    PASSWORD: "",
+    CORREO: "griskyh@gmail.com",
+    PASSWORD: "1234567",
   });
-  const handleChangeCredentials = (e, name) => {
-    setCredenciales({ ...credenciales, ...{ [name]: e.target.value } });
-    console.log("credenciales", { ...credenciales, [name]: e.target.value });
+  const [message, setMessage] = useState("");
+  const [openDialogNoLogin, setOpenDialogNoLogin] = useState(false);
+  const handleChangeCredentials = (value, name) => {
+    setCredenciales({ ...credenciales, ...{ [name]: value } });
+    console.log("credenciales", { ...credenciales, [name]: value });
+  };
+  const iniciarSesion = async () => {
+    openBackDropAction(dispatchBackdrop, "Iniciando sesion");
+    const { success, message, data } = await AuthController.login(
+      credenciales.CORREO,
+      credenciales.PASSWORD
+    );
+    closeBackDropAction(dispatchBackdrop);
+
+    if (success) {
+      //guardar context y localstorage
+      iniciarSesionContext(dispatch, data);
+      props.history.push("/encargado-control-activos");
+    } else {
+      //levanto dialog con mensaje
+      setMessage(message);
+      setOpenDialogNoLogin(true);
+    }
+
+    console.log("Data", success, message, data);
   };
 
-  //RECUPERACION
-  const [openDialog, setOpenDialog] = useState(false);
+  ////////  CONFIRMACION
+  const [openDialogConfirmacion, setOpenDialogConfirmacion] = useState(false);
+
+  ////////RECUPERACION
+  const [openDialogRecuperacion, setOpenDialogRecuperacion] = useState(false);
   const [correoRecuperacion, setCorreoRecuperacion] = useState("");
-  const handleCancel = () => {};
-  const handleAccept = () => {};
-  const handleClose = () => {
-    setOpenDialog(false);
+
+  const handleRecoverPasswordChange = (value) => {
+    setCorreoRecuperacion(value);
   };
-  const handleOpen = () => {
-    setOpenDialog(true);
-  };
-  const handleRecoverPasswordChange = (e) => {
-    setCorreoRecuperacion(e.target.value);
+
+  const handleRequestRecoverPassword = async () => {
+    console.log("Llamada request");
+    return;
+    const { success, message, data } = await AuthController.login(
+      correoRecuperacion
+    );
+    if (success) {
+      //guardar context y localstorage
+    } else {
+      //levanto dialog con mensaje
+      setMessage(message);
+      setOpenDialogConfirmacion(true);
+    }
+    console.log("Data", success, message, data);
   };
 
   return (
@@ -60,54 +112,19 @@ const Home = (props) => {
             />
 
             <FormInputText
-              name="contrasenia"
+              name="PASSWORD"
               onChange={handleChangeCredentials}
               value={credenciales.PASSWORD}
               label="Ingrese su contraseña"
               placeholder="Contraseña"
-              type="PASSWORD"
-            />
-            {/* <TextField
-              onKeyUp={(event) => {
-                if (event.keyCode === 13) {
-                  event.preventDefault();
-                }
-              }}
-              fullWidth
-              style={{ margin: "2% 0" }}
-              id="outlined-email-input"
-              label="Usuario"
-              type="email"
-              autoComplete="current-password"
-              variant="outlined"
-              onChange={(e) => {
-                // setUsuariologin({ ...usuarioLogin, email: e.target.value });
-              }}
+              type="password"
             />
 
-            <TextField
-              onKeyUp={(event) => {
-                if (event.keyCode === 13) {
-                  event.preventDefault();
-                }
-              }}
-              fullWidth
-              style={{ margin: "2% 0" }}
-              id="outlined-password-input"
-              label="Contraseña"
-              type="password"
-              autoComplete="current-password"
-              variant="outlined"
-              onChange={(e) => {
-                //setUsuariologin({ ...usuarioLogin, password: e.target.value });
-              }}
-              //value={usuarioLogin.password}
-            /> */}
             <button
               className="anchor"
               style={{ alignSelf: "flex-end", margin: "10px 0" }}
               //onClick={handleOpenDialog}
-              onClick={handleOpen}
+              onClick={() => setOpenDialogRecuperacion(true)}
             >
               Recuperar contraseña
             </button>
@@ -117,31 +134,53 @@ const Home = (props) => {
               color="primary"
               variant="contained"
               fullWidth
-              //onClick={iniciarSesion}
-              onClick={() => {
-                props.history.push("/encargado-control-activos");
-              }}
+              onClick={iniciarSesion}
             >
               Iniciar Sesion
             </Button>
           </div>
         </div>
       </MainWrapper>
+
+      {/**  RECUPERAR CONTTRASEÑA */}
       <ScrollDialog
-        open={openDialog}
-        onCancel={handleCancel}
-        onAccept={handleAccept}
-        onClose={handleClose}
+        open={openDialogRecuperacion}
+        // onCancel={() => {}}
+        onAccept={handleRequestRecoverPassword}
+        onClose={() => setOpenDialogRecuperacion(false)}
         title={"Recuperar contraseña"}
       >
         <FormInputText
           onChange={handleRecoverPasswordChange}
           value={correoRecuperacion}
           label="Ingrese el correo electrónico con el cual fue registrado en Quantum
-          Asset, ya que se le enviará las instrucciones de recuperacion de
-          cuenta"
+          Asset para reestablecer su contraseña"
           placeholder="Correo"
         />
+      </ScrollDialog>
+
+      {/**  INICIO DE SESION INCORRECTO */}
+      <ScrollDialog
+        open={openDialogNoLogin}
+        onAccept={() => {}}
+        onClose={() => setOpenDialogNoLogin(false)}
+        title={"Inicio de sesión incorrecto"}
+      >
+        <h4>{message}</h4>
+      </ScrollDialog>
+
+      {/**  CONFIRMACION DE ENVIO DE CORREO CONINSTRUCCIONES */}
+      <ScrollDialog
+        open={openDialogConfirmacion}
+        onAccept={() => props.history.push("/recover")}
+        onClose={() => setOpenDialogConfirmacion(false)}
+        title={"Resstablecer contraseña"}
+      >
+        <h4>
+          {
+            "Se le ha enviado un correo a su cuenta con instrucciones para reestablecer su contraseña"
+          }
+        </h4>
       </ScrollDialog>
     </Fragment>
   );

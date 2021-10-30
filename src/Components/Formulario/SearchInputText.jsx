@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InputAdornment, TextField } from "@material-ui/core";
+import {  InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 const SearchInputText = (props) => {
   const { name, onChange, value, label, placeholder, style } = props;
@@ -9,7 +9,7 @@ const SearchInputText = (props) => {
   }, [value]);
   const handleChange = (e) => {
     setLocalValue(e.target.value);
-    onChange?.({ ...e.target, name });
+    onChange?.(e.target.value, name );
   };
   return (
     <TextField

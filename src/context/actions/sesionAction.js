@@ -6,7 +6,7 @@ import { closeBackDropAction, openBackDropAction } from "./backDropAction";
  * @param {*} usuario
  * @param {*} password
  */
-export const iniciarSesionRedux = async (dispatch, usuario) => {
+export const iniciarSesionContext = async (dispatch, usuario) => {
   try {
     dispatch({
       type: "LOG_IN",

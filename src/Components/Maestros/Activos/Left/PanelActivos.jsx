@@ -1,191 +1,163 @@
-import { Grid } from "@material-ui/core";
 import React, { useState } from "react";
 import "./PanelActivos.scss";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Button, FormLabel, Grid } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchInputText from "../../../Formulario/SearchInputText";
+import ScrollDialog from "../../../../Templates/Dialogs/ScrollDialog";
+import FormInputText from "../../../Formulario/FormInputText";
+
 const PanelActivos = (props) => {
   const [filtros, setFriltros] = useState({ DENOMINACION: "" });
   const handleChange = (value, name) => {
     setFriltros({ ...filtros, [name]: value });
+    console.log("filtros", { ...filtros, [name]: value });
   };
+  //Dialog Nuevo Editar
+  const [openDialogRecuperacion, setOpenDialogRecuperacion] = useState(false);
+
   return (
     <div className="panel-activos-container">
-      <Grid container spacing={1} style={{ padding: "10px 1%" }}>
-        <Grid item md={6} xs={12}>
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            color="primary"
-            fullWidth
-            id="outlined-email-input"
-            label={"Denominación"}
-            type="search"
-            placeholder="Denominación del activo"
-            autoComplete="current-password"
-            variant="outlined"
-            // style={{ margin: "4px 0px" }}
-            size="small"
-            onChange={(e, name) => {
-              handleChange(e.target.value, "DENOMINACION");
-            }}
-            value={filtros.DENOMINACION}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="stretch"
+      >
+        <Grid item>
           <Grid
             container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
+            //spacing={1}
+            style={{ margin: "7px 0" }}
+            //style={{ padding: "10px 1%" }}
           >
-            <Button
-              color="primary"
-              variant="contained"
-              size="small"
-              //fullWidth
-              style={{ margin: "1px" }}
-              startIcon={<FileDownloadIcon />}
-              //onClick={iniciarSesion}
-              //onClick={iniciarSesion}
-            >
-              Descargar
-            </Button>
-            <Button
-              color="primary"
-              variant="contained"
-              size="small"
-              style={{ margin: "1px" }}
-              //fullWidth
-              startIcon={<UploadFileIcon />}
-              //onClick={iniciarSesion}
-              //onClick={iniciarSesion}
-            >
-              Subir CSV
-            </Button>
-            <Fab
-              color="primary"
-              aria-label="add"
-              size="small"
-              style={{ margin: "1px" }}
-              onClick={() => {
-                //setOpenAssetDialog(true);
-              }}
-            >
-              <AddIcon />
-            </Fab>
+            <Grid item md={6} xs={12}>
+              <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"DENOMINACION"}
+                value={filtros.DENOMINACION}
+                placeholder="Denominación del activo"
+                label={"Denominación"}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Button
+                  color="primary"
+                  variant="contained"
+                  //size="small"
+                  //fullWidth
+                  style={{ margin: "1px" }}
+                  startIcon={<FileDownloadIcon />}
+                  //onClick={iniciarSesion}
+                  //onClick={iniciarSesion}
+                >
+                  Descargar
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  //size="small"
+                  style={{ margin: "1px" }}
+                  //fullWidth
+                  startIcon={<UploadFileIcon />}
+                  //onClick={iniciarSesion}
+                  //onClick={iniciarSesion}
+                >
+                  Subir CSV
+                </Button>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  size="small"
+                  style={{ margin: "1px" }}
+                  onClick={() => setOpenDialogRecuperacion(true)}
+                >
+                  <AddIcon />
+                </Fab>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-
-        <div className="advanced-search-inputs">
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            color="primary"
-            fullWidth
-            id="outlined-email-input"
-            label={"Denominación"}
-            type="search"
-            placeholder="Denominación del activo"
-            autoComplete="current-password"
-            variant="outlined"
-            style={{ margin: "4px 4px" }}
-
-            size="small"
-            onChange={(e, name) => {
-              handleChange(e.target.value, "DENOMINACION");
-            }}
-            value={filtros.DENOMINACION}
-          />
-
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            color="primary"
-            fullWidth
-            id="outlined-email-input"
-            label={"Denominación"}
-            type="search"
-            placeholder="Denominación del activo"
-            autoComplete="current-password"
-            variant="outlined"
-            style={{ margin: "4px 4px" }}
-
-            size="small"
-            onChange={(e, name) => {
-              handleChange(e.target.value, "DENOMINACION");
-            }}
-            value={filtros.DENOMINACION}
-          />
-
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            color="primary"
-            fullWidth
-            id="outlined-email-input"
-            label={"Denominación"}
-            type="search"
-            placeholder="Denominación del activo"
-            autoComplete="current-password"
-            variant="outlined"
-            style={{ margin: "4px 4px" }}
-            size="small"
-            onChange={(e, name) => {
-              handleChange(e.target.value, "DENOMINACION");
-            }}
-            value={filtros.DENOMINACION}
-          />
-
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            color="primary"
-            fullWidth
-            id="outlined-email-input"
-            label={"Denominación"}
-            type="search"
-            placeholder="Denominación del activo"
-            autoComplete="current-password"
-            variant="outlined"
-            style={{ margin: "4px 4px" }}
-
-            size="small"
-            onChange={(e, name) => {
-              handleChange(e.target.value, "DENOMINACION");
-            }}
-            value={filtros.DENOMINACION}
-          />
-        </div>
+        <Grid item>
+          <Grid container style={{ margin: "15px 0" }}>
+            <Grid item md={3} sm={12} xs={12}>
+              {" "}
+              <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"DENOMINACION"}
+                value={filtros.DENOMINACION}
+                placeholder="Denomisssnación del activo"
+                label={"Denominación"}
+              />
+            </Grid>
+            <Grid item md={3} sm={12} xs={12}>
+              <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"DENOMINACION"}
+                value={filtros.DENOMINACION}
+                placeholder="Denominación del activo"
+                label={"Denominación"}
+              />
+            </Grid>
+            <Grid item md={3} sm={12} xs={12}>
+              <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"DENOMINACION"}
+                value={filtros.DENOMINACION}
+                placeholder="Denominación del activo"
+                label={"Denominación"}
+              />
+            </Grid>
+            <Grid item md={3} sm={12} xs={12}>
+              <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"DENOMINACION"}
+                value={filtros.DENOMINACION}
+                placeholder="Denominación del activo"
+                label={"Denominación"}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
+      <ScrollDialog
+        open={openDialogRecuperacion}
+        // onCancel={() => {}}
+        onSave={()=>{}}
+        onCancel={()=>{}}
+        //onAccept={handleRequestRecoverPassword}
+        onClose={() => setOpenDialogRecuperacion(false)}
+        title={"Nuevo / Editar Activo Fijo"}
+        fullWidth={true}
+        maxWidth={"md"}
+      >
+        <FormLabel
+          component="legend"
+          style={{ fontSize: "1.1rem", color: "black", margin: "10px 0" }}
+        >
+          Informacion Crítica
+        </FormLabel>
+        <FormInputText
+          //onChange={handleChageActivo}
+          name=""
+          //value={correoRecuperacion}
+          label="Denominación"
+          placeholder="Correo"
+        />
+      </ScrollDialog>
     </div>
   );
 };

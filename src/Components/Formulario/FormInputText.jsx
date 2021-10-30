@@ -1,16 +1,25 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FormLabel } from "@mui/material";
-import { TextField } from "@material-ui/core";
+import {  InputAdornment, TextField } from "@mui/material";
+
 const FormInputText = (props) => {
-  const { name, onChange, value, label, placeholder, style, onKeyUp, type } =
-    props;
+  const {
+    name,
+    onChange,
+    value,
+    label,
+    placeholder,
+    style,
+    onKeyUp,
+    type,
+  } = props;
   const [localValue, setLocalValue] = useState("");
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
   const handleChange = (e) => {
     setLocalValue(e.target.value);
-    onChange?.(e,name);
+    onChange?.(e.target.value, name);
   };
   return (
     <Fragment>

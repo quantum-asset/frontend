@@ -1,14 +1,24 @@
 .panel-activos-container {
-  width: 100%;
+  padding: 15px 7px;
+  width: calc(100% - 14px);
   border-radius: 6px;
   background-color: white;
   margin-bottom: 15px;
 }
-.advanced-search-inputs {
+/* .advanced-search-inputs {
   margin-top: 5px;
   //padding: 0 10px 10px 10px;
   display: flex;
   width: 98%;
+  flex-direction: row;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+} */
+.advanced-search-inputs {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
   flex-direction: row;
   @media (max-width: 960px) {
     flex-direction: column;
