@@ -9,8 +9,12 @@ import SideBarButton from "./SideBarButton";
 import { Close } from "@mui/icons-material";
 import SideBarMobileButton from "./SideBarMobileButton";
 import { IconButton } from "@mui/material";
+import { cerrarSesionRedux } from "../../../Context/actions/sesionAction";
+import { useUserValue } from "../../../Context/Sesion";
 
 const SideBar = (props) => {
+  const [{ auth, usuario }, dispatch] = useUserValue();
+
   const myOptions = sideBarOptions(props.base) || [];
   const { openMobileMenu, onChangeMobileMenu } = props;
   const [activePage, setActivePage] = useState(1);
@@ -64,8 +68,8 @@ const SideBar = (props) => {
         <div
           className="main-side-bar-logout"
           onClick={() => {
-            //cerrarSesionRedux(dispatch);
-            //props.history.push("/")
+           const resposne= cerrarSesionRedux(dispatch);
+console.log("logoutttttt",resposne);
           }}
         >
           {" "}
@@ -130,7 +134,8 @@ const SideBar = (props) => {
             <div
               className="side-bar-mobile-logout"
               onClick={() => {
-                //cerrarSesionRedux(dispatch);
+                const resposne= cerrarSesionRedux(dispatch);
+                console.log("logoutttttt",resposne);
               }}
             >
               {" "}

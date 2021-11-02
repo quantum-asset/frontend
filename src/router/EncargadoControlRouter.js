@@ -7,10 +7,15 @@ import SideBar from "../Components/Navegacion/SideBar/SideBar";
 import PageWrapper from "../Components/MainWrapper/PageWrapper";
 import MainWrapper from "../Components/MainWrapper/MainWrapper";
 import NavBar from "../Components/Navegacion/Navbar/NavBar";
+import { useUserValue } from "../Context/Sesion";
 
 const EncargadoControlRouter = (props) => {
   const [navBarTitle, setNavBarTtle] = useState("");
   const [open, setOpen] = useState(false);
+  const [{ auth, usuario }, dispatch] = useUserValue();
+  if (!auth) {
+    props.history.push(`/`);
+  }
   const handleChangeTitle = (newTitle) => {
     setNavBarTtle(newTitle);
   };

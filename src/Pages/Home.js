@@ -25,7 +25,7 @@ const Home = (props) => {
   //////////////   LOGIN
   const [credenciales, setCredenciales] = useState({
     CORREO: "griskyh@gmail.com",
-    PASSWORD: "1234567",
+    PASSWORD: "lalalalalala",
   });
   const [message, setMessage] = useState("");
   const [openDialogNoLogin, setOpenDialogNoLogin] = useState(false);

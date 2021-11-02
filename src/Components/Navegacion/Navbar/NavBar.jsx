@@ -10,15 +10,16 @@ import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import "./NavBar.scss";
 import { YELLOW } from "../../../Theme/MainColors";
+import { cerrarSesionRedux } from "../../../Context/actions/sesionAction";
+import { useUserValue } from "../../../Context/Sesion";
 export default function NavBar(props) {
   const { title, onChangeMobileMenu } = props;
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [{ auth, usuario }, dispatch] = useUserValue();
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
+  const handleCerrarSesion = () => {
+    cerrarSesionRedux(dispatch);
   };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +30,10 @@ export default function NavBar(props) {
   const handleOpenMobileMenu = () => {
     onChangeMobileMenu?.(true);
   };
+  const [nombreUsuario, setNombreUsuario] = React.useState("");
+  React.useEffect(() => {
+    setNombreUsuario(`${usuario.NOMBRES} ${usuario.PRIMER_APELLIDO}`);
+  }, []);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -60,7 +65,12 @@ export default function NavBar(props) {
             {title}
           </h2>
           {/** SPACE */}
-
+ <div
+            className="navbar-nombre"
+           
+            >
+              {nombreUsuario}
+            </div>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -70,6 +80,7 @@ export default function NavBar(props) {
             color="inherit"
           >
             {" "}
+           
             <Avatar
               style={{ margin: "0%" }}
               alt="Tony Stark"
@@ -93,7 +104,7 @@ export default function NavBar(props) {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>Perfil</MenuItem>
-            <MenuItem onClick={handleClose}>Cerrar Sesion</MenuItem>
+            <MenuItem onClick={handleCerrarSesion}>Cerrar Sesion</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

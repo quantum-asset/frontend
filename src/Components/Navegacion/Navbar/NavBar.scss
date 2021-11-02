@@ -4,8 +4,19 @@
     display: block;
   }
 }
-.navbar-title{
+.navbar-title {
   @media (max-width: 600px) {
     font-size: 20px;
+  }
+}
+.navbar-nombre {
+  display: flex;
+  font-size: 0.7em;
+  height: 100%;
+  flex-wrap: wrap;
+  word-break: break-word;
+  @media (max-width: 600px) {
+    font-size: 0.5em;
+
   }
 }

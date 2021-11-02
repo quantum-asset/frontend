@@ -66,10 +66,10 @@ export const cerrarSesionRedux = (dispatch
       auth: false,
     });
 
-    return { status: true };
+    return  true ;
   } catch (error) {
     console.log("error login: ", error);
-    return { status: false };
+    return  false;
   }
 };
 /**
