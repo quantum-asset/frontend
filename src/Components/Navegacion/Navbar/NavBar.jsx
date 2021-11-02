@@ -65,12 +65,7 @@ export default function NavBar(props) {
             {title}
           </h2>
           {/** SPACE */}
- <div
-            className="navbar-nombre"
-           
-            >
-              {nombreUsuario}
-            </div>
+          <div className="navbar-nombre">{nombreUsuario}</div>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -80,7 +75,6 @@ export default function NavBar(props) {
             color="inherit"
           >
             {" "}
-           
             <Avatar
               style={{ margin: "0%" }}
               alt="Tony Stark"
