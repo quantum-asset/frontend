@@ -6,17 +6,15 @@ import "./Home.scss";
 import ScrollDialog from "../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../Components/Formulario/FormInputText";
 import { AuthController } from "../Controller/loginController";
-import {  useUserValue } from "../Context/Sesion";
+import { useUserValue } from "../Context/Sesion";
 import { iniciarSesionContext } from "../Context/actions/sesionAction";
-import {
-  closeBackDropAction,
-  openBackDropAction,
-} from "../Context/actions/backDropAction";
 import { useBackDropValue } from "../Context/backdrop";
+import { Backdrop, CircularProgress } from "@mui/material";
+
 const Home = (props) => {
   //BACKDROP
   const [, dispatchBackdrop] = useBackDropValue();
-
+  const [openBackdrop, setOpenBackdrop] = useState(false);
   // VERIFICACION del CONTEXT
   const [{ auth, usuario }, dispatch] = useUserValue();
   if (auth) {
@@ -36,12 +34,15 @@ const Home = (props) => {
     console.log("credenciales", { ...credenciales, [name]: value });
   };
   const iniciarSesion = async () => {
-    openBackDropAction(dispatchBackdrop, "Iniciando sesion");
+    //openBackDropAction(dispatchBackdrop, "Iniciando sesion");
+    setOpenBackdrop(true);
     const { success, message, data } = await AuthController.login(
       credenciales.CORREO,
       credenciales.PASSWORD
     );
-    closeBackDropAction(dispatchBackdrop);
+    setOpenBackdrop(false);
+
+    //closeBackDropAction(dispatchBackdrop);
 
     if (success) {
       //guardar context y localstorage
@@ -85,6 +86,14 @@ const Home = (props) => {
 
   return (
     <Fragment>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+        {"Iniciando Sesión"}
+      </Backdrop>
       <MainWrapper>
         <div className="quantum-home">
           <div className="logo-background">
@@ -124,7 +133,7 @@ const Home = (props) => {
               className="anchor"
               style={{ alignSelf: "flex-end", margin: "10px 0" }}
               //onClick={handleOpenDialog}
-              onClick={() => setOpenDialogRecuperacion(true)}
+              onClick={() => props.history.push("/recover")}
             >
               Recuperar contraseña
             </button>

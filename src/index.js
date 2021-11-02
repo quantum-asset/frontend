@@ -17,8 +17,8 @@ import {
 import { BackDropProvider } from "./Context/backdrop";
 import openBackDropReducer from "./Context/reducers/openBackDropReducer";
 dotenv.config();
-axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER_DEV;
 //axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER;
+axios.defaults.baseURL = process.env.REACT_APP_MAIN_SERVER_DEV;
 
 ReactDOM.render(
   <React.StrictMode>

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import Recover from "../Pages/Recover";
 import { useBackDropValue } from "../Context/backdrop";
 import { Backdrop, CircularProgress } from "@mui/material";
-
+//import FileItemProps from "../TESTS/FileItemProps";
 function App(props) {
   const [{ auth, usuario }, dispatch] = useUserValue();
   const [{ openBackDrop, mensajeBD }, dispatchBackdrop] = useBackDropValue();
@@ -34,6 +34,11 @@ function App(props) {
         {mensajeBD || "Cargando..."}
       </Backdrop>
       <Route exact path="/" component={(props) => <Home {...props} />} />
+      <Route
+        exact
+        path="/recover"
+        component={(props) => <Recover {...props} />}
+      />
       <Route
         exact
         path="/recover/:codigo"

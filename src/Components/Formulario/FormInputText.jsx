@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FormLabel } from "@mui/material";
 import {  InputAdornment, TextField } from "@mui/material";
+const validator=()=>{
 
+}
 const FormInputText = (props) => {
   const {
     name,
@@ -12,6 +14,7 @@ const FormInputText = (props) => {
     style,
     onKeyUp,
     type,
+    helperText,error
   } = props;
   const [localValue, setLocalValue] = useState("");
   useEffect(() => {
@@ -36,6 +39,8 @@ const FormInputText = (props) => {
         value={localValue}
         type={type}
         onChange={handleChange}
+        helperText={helperText}
+        error={error}
       />
     </Fragment>
   );
