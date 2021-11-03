@@ -1,24 +1,25 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React,{ Fragment,useEffect,useState } from "react";
 import { ActivosController } from "../../../../Controller/ActivosController";
 import { LocacionController } from "../../../../Controller/LocacionController";
 import { TagController } from "../../../../Controller/TagController";
 import { TipoActivoController } from "../../../../Controller/TipoActivoController";
+import { downloadTexFile } from "../../../../utils/files.utils";
 import Title from "../../../Title/Title";
 import PanelActivos from "./PanelActivos";
 import TablaActivos from "./TablaActivos";
 
 const LeftSideActivos = (props) => {
   //lista de activos
-  const [activos, setActivos] = useState([]);
+  const [activos,setActivos] = useState([]);
   //lista de tags
-  const [tags, setTags] = useState([]);
+  const [tags,setTags] = useState([]);
   //lista de locaciones
-  const [locaciones, setLocaciones] = useState([]);
+  const [locaciones,setLocaciones] = useState([]);
   //lista de Tipos de activo
-  const [tipoActivos, setTipoActivos] = useState([]);
+  const [tipoActivos,setTipoActivos] = useState([]);
 
-  const [rowsFiltrado, setRowsFiltrado] = useState([]);
-  const [rowsServer, setRowsServer] = useState([]);
+  const [rowsFiltrado,setRowsFiltrado] = useState([]);
+  const [rowsServer,setRowsServer] = useState([]);
 
   const makeDataTable = async (
     activos = [],
@@ -35,14 +36,14 @@ const LeftSideActivos = (props) => {
     let dataToTable = [];
     //  dataToTable.length
     // if (activos && locaciones && tags) {
-    console.log("makeDataTable sactivos.length", activos.length);
+    console.log("makeDataTable sactivos.length",activos.length);
 
     for (let i = 0; i < activos.length; i++) {
       const currentActivo = activos[i];
-      console.log("currentActivo", currentActivo);
+      console.log("currentActivo",currentActivo);
 
       const tag = tags.filter((x) => x.ID_TAG === currentActivo.ID_TAG)[0];
-      console.log("found tag", tag);
+      console.log("found tag",tag);
       if (!tag) {
         dataToTable = [];
         break;
@@ -54,7 +55,7 @@ const LeftSideActivos = (props) => {
         dataToTable = [];
         break;
       }
-      console.log("found locacion", locacion);
+      console.log("found locacion",locacion);
 
 
       const tipoActivo = tipoActivos.filter(
@@ -64,7 +65,7 @@ const LeftSideActivos = (props) => {
         dataToTable = [];
         break;
       }
-      console.log("found tipoActivo", tipoActivo);
+      console.log("found tipoActivo",tipoActivo);
 
       dataToTable.push({
         ...currentActivo,
@@ -74,25 +75,25 @@ const LeftSideActivos = (props) => {
       });
     }
     //}
-    // console.log("makeDataTable end", dataToTable);
+    // console.log("makeDataTable end",dataToTable);
     setRowsServer(dataToTable);
-    console.log("SUperTable dataToTable", dataToTable);
+    console.log("SUperTable dataToTable",dataToTable);
 
     setRowsFiltrado(dataToTable);
   };
 
   const init = async () => {
     const activos = await ActivosController.list();
-    console.log("activos", activos.data);
+    console.log("activos",activos.data);
     const locaciones = await LocacionController.list();
-    console.log("locaciones", locaciones.data);
+    console.log("locaciones",locaciones.data);
     const tags = await TagController.list();
-    console.log("tags", tags.data);
+    console.log("tags",tags.data);
     const tipoActivos = await TipoActivoController
       .list
-      //{ filtrosKeys: ["DENOMINACION"], filtrosValues: ["\"TI\""] }
+      //{ filtrosKeys: ["DENOMINACION"],filtrosValues: ["\"TI\""] }
       ();
-    console.log("tipoActivos", tipoActivos);
+    console.log("tipoActivos",tipoActivos);
     setActivos(activos.data);
     setLocaciones(locaciones.data);
     setTags(tags.data);
@@ -105,10 +106,10 @@ const LeftSideActivos = (props) => {
   };
   useEffect(() => {
     init();
-  }, []);
+  },[]);
 
   ///////////////    panel
-  const [filtros, setFiltros] = useState([{ name: "", value: "" }]);
+  const [filtros,setFiltros] = useState([{ name: "",value: "" }]);
   const handleChangeFiltro = (newFiltros) => {
     setFiltros(newFiltros);
   };
@@ -130,12 +131,23 @@ const LeftSideActivos = (props) => {
   };
   useEffect(() => {
     setRowsFiltrado(filtrarData(rowsFiltrado));
-  }, [filtros]);
+  },[filtros]);
+///// DESCARGAR DATA
+const downloadActivos=()=>{
+  const headers= "CODIGO DE TAG,DENOMINACION,TIPO DE ACTIVO,LOCACION,CENTRO DE COSTOS\n";
+  let data="";
 
+  for(let i=0;i<rowsFiltrado.length;i++){
+    const {COD_TAG,DENOMINACION,TIPO_ACTIVO,LOCACION,CENTRO_COSTO} =rowsFiltrado[i];
+    const linea = `${COD_TAG},${DENOMINACION},${TIPO_ACTIVO},${LOCACION},${CENTRO_COSTO}\n`;
+    data+=linea;
+  }
+  downloadTexFile("activos.csv",headers+ data);
+}
   return (
     <Fragment>
       <Title title="Gestión de Activos Fijos" />
-      <PanelActivos handleChangeFiltro={handleChangeFiltro} filtros={filtros} />
+      <PanelActivos handleChangeFiltro={handleChangeFiltro} filtros={filtros} download={downloadActivos} />
       <TablaActivos rowsFiltrado={rowsFiltrado} />
     </Fragment>
   );

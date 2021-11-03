@@ -10,6 +10,7 @@ import ScrollDialog from "../../../../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../../../Formulario/FormInputText";
 
 const PanelActivos = (props) => {
+  const {download} = props;
   const [filtros, setFriltros] = useState({ DENOMINACION: "" });
   const handleChange = (value, name) => {
     setFriltros({ ...filtros, [name]: value });
@@ -30,7 +31,7 @@ const PanelActivos = (props) => {
           <Grid
             container
             //spacing={1}
-            style={{ margin: "7px 0" }}
+            //style={{ margin: "7px 0 0 0" }}
             //style={{ padding: "10px 1%" }}
           >
             <Grid item md={6} xs={12}>
@@ -57,7 +58,7 @@ const PanelActivos = (props) => {
                   //fullWidth
                   style={{ margin: "1px" }}
                   startIcon={<FileDownloadIcon />}
-                  //onClick={iniciarSesion}
+                  onClick={()=>{download?.()}}
                   //onClick={iniciarSesion}
                 >
                   Descargar
@@ -88,12 +89,12 @@ const PanelActivos = (props) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container style={{ margin: "15px 0" }}>
+          <Grid container style={{ margin: "5px 0" }}>
             <Grid item md={3} sm={12} xs={12}>
               {" "}
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "2px 0" }}
+                style={{ margin: "7px 0" }}
                 name={"DENOMINACION"}
                 value={filtros.DENOMINACION}
                 placeholder="Denomisssnación del activo"
@@ -103,7 +104,7 @@ const PanelActivos = (props) => {
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "2px 0" }}
+                style={{ margin: "7px 0" }}
                 name={"DENOMINACION"}
                 value={filtros.DENOMINACION}
                 placeholder="Denominación del activo"
@@ -113,7 +114,7 @@ const PanelActivos = (props) => {
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "2px 0" }}
+                style={{ margin: "7px 0" }}
                 name={"DENOMINACION"}
                 value={filtros.DENOMINACION}
                 placeholder="Denominación del activo"
@@ -123,7 +124,7 @@ const PanelActivos = (props) => {
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "2px 0" }}
+                style={{ margin: "7px 0" }}
                 name={"DENOMINACION"}
                 value={filtros.DENOMINACION}
                 placeholder="Denominación del activo"
@@ -136,8 +137,8 @@ const PanelActivos = (props) => {
       <ScrollDialog
         open={openDialogRecuperacion}
         // onCancel={() => {}}
-        onSave={()=>{}}
-        onCancel={()=>{}}
+        onSave={() => {}}
+        onCancel={() => {}}
         //onAccept={handleRequestRecoverPassword}
         onClose={() => setOpenDialogRecuperacion(false)}
         title={"Nuevo / Editar Activo Fijo"}

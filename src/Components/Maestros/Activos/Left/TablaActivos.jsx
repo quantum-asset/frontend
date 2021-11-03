@@ -1,4 +1,5 @@
 import { Delete, Edit } from "@mui/icons-material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton } from "@mui/material";
 import React, { Fragment } from "react";
 import PaginationTable from "../../../../Templates/Tables/PaginationTable";
@@ -13,10 +14,13 @@ const TablaActivos = (props) => {
   const handleEdit = (id) => {
     alert("edit " + id);
   };
+  const handleSee=(id)=>{
+alert("see " + id);
+  }
   return (
     <Fragment>
       <PaginationTable
-        headers={columns(handleDelete, handleEdit)}
+        headers={columns(handleDelete, handleEdit,handleSee)}
         rows={rowsFiltrado}
       />
       {/**
@@ -28,17 +32,25 @@ const TablaActivos = (props) => {
 };
 export default TablaActivos;
 
-const columns = (handleDelete, handleEdit) => [
+const columns = (handleDelete, handleEdit,handleSee) => [
   { title: "Codigo de Tag", field: "COD_TAG" },
-  { title: "Denominacion", field: "DENOMINACION" },
+  { title: "Denominación", field: "DENOMINACION" },
   { title: "Tipo de activo", field: "TIPO_ACTIVO" },
-  { title: "Locacion", field: "LOCACION" },
+  { title: "LOCACION", field: "LOCACION" },
   { title: "Centro de Costos", field: "CENTRO_COSTO" },
   {
     title: "Acciones",
     render: (rowData) => {
       return (
         <Fragment>
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+            onClick={(e) => handleSee(rowData.ID_ACTIVO)}
+          >
+            <VisibilityIcon />
+          </IconButton>
           <IconButton
             color="primary"
             aria-label="upload picture"

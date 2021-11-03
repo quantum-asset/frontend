@@ -104,23 +104,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function createData(name, calories, fat) {
   return { name, calories, fat };
 }
-/* 
-const rows = [
-  createData("Cupcake", 305, 3.7),
-  createData("Donut", 452, 25.0),
-  createData("Eclair", 262, 16.0),
-  createData("Frozen yoghurt", 159, 6.0),
-  createData("Gingerbread", 356, 16.0),
-  createData("Honeycomb", 408, 3.2),
-  createData("Ice cream sandwich", 237, 9.0),
-  createData("Jelly Bean", 375, 0.0),
-  createData("KitKat", 518, 26.0),
-  createData("Lollipop", 392, 0.2),
-  createData("Marshmallow", 318, 0),
-  createData("Nougat", 360, 19.0),
-  createData("Oreo", 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
- */
+
 export default function PaginationTable(props) {
   //
   console.log("SUperTable props", props);
@@ -151,7 +135,13 @@ export default function PaginationTable(props) {
               headers.map((header, index) => (
                 <StyledTableCell
                   key={index}
-                  align={index > 0 ? "right" : "left"}
+                  align={
+                    index === headers.length - 1
+                      ? "center"
+                      : index === 0
+                      ? "left"
+                      : "right"
+                  }
                 >
                   {header.title}
                 </StyledTableCell>
@@ -172,7 +162,7 @@ export default function PaginationTable(props) {
                     component="th"
                     scope="row"
                     key={index}
-                    align={index > 0 ? "right" : "left"}
+                    align={index === 0 ? "left" : "right"}
                   >
                     {h.render ? h.render(row) : row[h.field]}
                   </StyledTableCell>
@@ -181,7 +171,21 @@ export default function PaginationTable(props) {
             ))
           ) : (
             <StyledTableRow style={{ height: 53 * emptyRows }}>
-              <StyledTableCell colSpan={6} /> No hay datos para mostrar
+              {/**
+               * aqui hago el loading
+               *  y el no hay datos
+               */}
+              <div
+                style={{
+                  height: "400px",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                No hay datos que mostrar
+              </div>
             </StyledTableRow>
           )}
 

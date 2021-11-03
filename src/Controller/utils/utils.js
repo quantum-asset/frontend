@@ -1,3 +1,9 @@
+/**
+ * Make query for backend
+ * @param {*} filtrosKeys 
+ * @param {*} filtrosValues 
+ * @returns 
+ */
 export const makeQuery = (filtrosKeys = [], filtrosValues = []) => {
     console.log("make query",filtrosKeys,filtrosValues);
   let result = "";
@@ -14,3 +20,4 @@ export const makeQuery = (filtrosKeys = [], filtrosValues = []) => {
     return "";
   }
 };
+
