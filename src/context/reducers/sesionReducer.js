@@ -27,7 +27,7 @@ const sesionReducer = (state = estadoInicial, action) => {
       };
 
     case "INITIALIZE_SESION":
-      //console.log("INITIALIZE_SESION, action", action);
+      console.log("INITIALIZE_SESION, action", action);
       return {
         ...state,
         usuario: action.usuario,

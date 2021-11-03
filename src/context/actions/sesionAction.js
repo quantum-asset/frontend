@@ -1,5 +1,17 @@
 import { localLogOut, localLogin, getUser } from "../Sesion";
 import { closeBackDropAction, openBackDropAction } from "./backDropAction";
+export const getPathFromRol = (denominacion) => {
+  console.log("rol =P", denominacion);
+  if (!denominacion) return null;
+  if (denominacion.toLowerCase().includes("control")) {
+    return "/encargado-control-activos";
+  } else if (denominacion.toLowerCase().includes("inventario")) {
+    return "/encargado-toma-inventario";
+  }
+  if (denominacion.toLowerCase().includes("registro")) {
+    return "/encargado-registro-activos";
+  }
+};
 /**
  *
  * @param {*} dispatch
@@ -10,11 +22,14 @@ export const iniciarSesionContext = async (dispatch, usuario) => {
   try {
     dispatch({
       type: "LOG_IN",
-      usuario: usuario,
+      usuario: { ...usuario, rol: usuario.rol[0] },
       auth: true,
     });
-    console.log("iniciarSesionRedux localLogin");
-   await localLogin(usuario);
+    console.log("iniciarSesionRedux localLogin", {
+      ...usuario,
+      rol: usuario.rol[0],
+    });
+    await localLogin({ ...usuario, rol: usuario.rol[0] });
     return usuario;
   } catch (error) {
     return undefined;
@@ -46,9 +61,10 @@ export const registrarse = (dispatch, newUser) => {
  *
  * @param {*} dispatch
  */
-export const cerrarSesionRedux = (dispatch
+export const cerrarSesionRedux = (
+  dispatch
   //, dispatchBackdrop
-  ) => {
+) => {
   console.log("Logout llamado");
 
   try {
@@ -66,10 +82,10 @@ export const cerrarSesionRedux = (dispatch
       auth: false,
     });
 
-    return  true ;
+    return true;
   } catch (error) {
     console.log("error login: ", error);
-    return  false;
+    return false;
   }
 };
 /**
@@ -78,7 +94,7 @@ export const cerrarSesionRedux = (dispatch
  * @param {*} usuario
  */
 export const inicializarSesion = (dispatch, usuario) => {
-  console.log("Inicializando...");
+  console.log("Inicializando...", dispatch);
   try {
     //chequeo al el storage
     let usuarioLogueado = getUser();
@@ -90,23 +106,26 @@ export const inicializarSesion = (dispatch, usuario) => {
         usuario: usuarioLogueado,
         auth: true,
       });
-
+      console.log("=>", usuarioLogueado.rol.DENOMINACION);
       return {
         status: true,
         data: usuarioLogueado,
-        HOMEPAGE: "/" + usuarioLogueado.rol.nombre.toLowerCase(),
+        //HOMEPAGE: "/" + usuarioLogueado.rol.DENOMINACION.toLowerCase(),
+        HOMEPAGE: "/" + getPathFromRol(usuarioLogueado.rol.DENOMINACION),
       };
+    } else {
+      dispatch({
+        type: "INITIALIZE_SESION",
+        usuario: undefined,
+        auth: false,
+        // },
+      });
     }
     //console.log("Storage vacio", usuarioLogueado);
 
-    dispatch({
-      type: "INITIALIZE_SESION",
-      usuario: usuario,
-      auth: false,
-      // },
-    });
     return { status: false, data: "storage vacio" };
   } catch (error) {
+    console.log("error", error);
     return { status: false, data: "MALDICIOOOOOOOON" };
   }
 };

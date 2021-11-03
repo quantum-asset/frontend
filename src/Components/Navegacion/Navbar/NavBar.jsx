@@ -12,7 +12,7 @@ import "./NavBar.scss";
 import { YELLOW } from "../../../Theme/MainColors";
 import { cerrarSesionRedux } from "../../../Context/actions/sesionAction";
 import { useUserValue } from "../../../Context/Sesion";
-export default function NavBar(props) {
+export default function (props) {
   const { title, onChangeMobileMenu } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [{ auth, usuario }, dispatch] = useUserValue();
@@ -32,8 +32,11 @@ export default function NavBar(props) {
   };
   const [nombreUsuario, setNombreUsuario] = React.useState("");
   React.useEffect(() => {
+    console.log("NAVBAR usuario", usuario);
+    console.log("NAVBAR props", props);
     setNombreUsuario(`${usuario.NOMBRES} ${usuario.PRIMER_APELLIDO}`);
   }, []);
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -77,7 +80,7 @@ export default function NavBar(props) {
             {" "}
             <Avatar
               style={{ margin: "0%" }}
-              alt="Tony Stark"
+              alt={nombreUsuario || "avatar-name"}
               src="https://img.vixdata.io/pd/webp-large/es/sites/default/files/btg/tech.batanga.com/files/Asi-es-como-aplicas-la-tecnologia-de-Tony-Stark-a-diario-sin-darte-cuenta-1.jpg"
             />
             <ExpandMore />

@@ -17,6 +17,7 @@ const EncargadoControlRouter = (props) => {
     props.history.push(`/`);
   }
   const handleChangeTitle = (newTitle) => {
+    console.log("new title", newTitle);
     setNavBarTtle(newTitle);
   };
   const handleCloseMobileMenu = (value) => {

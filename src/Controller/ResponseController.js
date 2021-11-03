@@ -7,7 +7,7 @@ export class ResponseController {
      * @returns 
      */
   static ok = (status, message, data) => {
-    return { success: status.toLowerCase() === "ok", message, data };
+    return { success: status.toLowerCase() === "ok" || status.toLowerCase() === "success", message, data };
   };
   /**
    * 

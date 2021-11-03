@@ -6,6 +6,12 @@ import "./Maestros.scss";
 import Title from "../Components/Title/Title";
 import LeftSideActivos from "../Components/Maestros/Activos/Left/LeftSideActivos";
 import RightSideActivos from "../Components/Maestros/Activos/Right/RightSideActivos";
+import LeftSideLocaciones from "../Components/Maestros/Locaciones/Left/LeftSideLocaciones";
+import RightSideLocaciones from "../Components/Maestros/Locaciones/Right/RightSideLocaciones";
+import LeftSideTags from "../Components/Maestros/Tags/Left/LeftSideTags";
+import RightSideTags from "../Components/Maestros/Tags/Right/RightSideTags";
+import LeftSideUsuarios from "../Components/Maestros/Usuarios/Left/LeftSideUsuarios";
+import RightSideUsuarios from "../Components/Maestros/Usuarios/Right/RightSideUsuarios";
 const Maestros = (props) => {
   const { setNavBarTitle } = props;
   const [value, setValue] = React.useState(0);
@@ -35,19 +41,38 @@ const Maestros = (props) => {
       <TabPanel
         value={value}
         index={0}
-        title={<Title title="Gestión de Activos Fijos" />}
+        //title={<Title title="Gestión de Activos Fijos" />}
       >
-        <div className="left-side"><LeftSideActivos/></div>
-        <div className="right-side"><RightSideActivos/></div>
+        <div className="left-side">
+          <LeftSideActivos />
+        </div>
+        <div className="right-side">
+          <RightSideActivos />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        bolii
+        <div className="left-side">
+          <LeftSideLocaciones />
+        </div>
+        <div className="right-side">
+          <RightSideLocaciones />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        caracoli
+        <div className="left-side">
+          <LeftSideTags />
+        </div>
+        <div className="right-side">
+          <RightSideTags />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        camaron
+        <div className="left-side">
+          <LeftSideUsuarios />
+        </div>
+        <div className="right-side">
+          <RightSideUsuarios />
+        </div>
       </TabPanel>
     </Fragment>
   );

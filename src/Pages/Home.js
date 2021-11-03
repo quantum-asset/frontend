@@ -7,7 +7,10 @@ import ScrollDialog from "../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../Components/Formulario/FormInputText";
 import { AuthController } from "../Controller/loginController";
 import { useUserValue } from "../Context/Sesion";
-import { iniciarSesionContext } from "../Context/actions/sesionAction";
+import {
+  getPathFromRol,
+  iniciarSesionContext,
+} from "../Context/actions/sesionAction";
 import { useBackDropValue } from "../Context/backdrop";
 import { Backdrop, CircularProgress } from "@mui/material";
 
@@ -18,8 +21,9 @@ const Home = (props) => {
   // VERIFICACION del CONTEXT
   const [{ auth, usuario }, dispatch] = useUserValue();
   if (auth) {
-    const rol = usuario;
-    props.history.push(`/encargado-control-activo`);
+    console.log("Home context", usuario);
+    const path = getPathFromRol(usuario.rol.DENOMINACION);
+    props.history.push(path);
   }
 
   //////////////   LOGIN
@@ -47,7 +51,8 @@ const Home = (props) => {
     if (success) {
       //guardar context y localstorage
       iniciarSesionContext(dispatch, data);
-      props.history.push("/encargado-control-activos");
+      console.log("rol =L",data.rol[0]);
+      props.history.push(getPathFromRol(data.rol[0].DENOMINACION));
     } else {
       //levanto dialog con mensaje
       setMessage(message);

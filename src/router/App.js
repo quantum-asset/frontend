@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Recover from "../Pages/Recover";
 import { useBackDropValue } from "../Context/backdrop";
 import { Backdrop, CircularProgress } from "@mui/material";
+import Redirector from "../Pages/Redirector";
 //import FileItemProps from "../TESTS/FileItemProps";
 function App(props) {
   const [{ auth, usuario }, dispatch] = useUserValue();
@@ -19,7 +20,8 @@ function App(props) {
     if (!auth) {
       console.log("MAINAPP", usuario, auth);
       const res = inicializarSesion(dispatch);
-      console.log("APP", res);
+       console.log("APP", res);
+     /* window.location.replace(res.HOMEPAGE); */
     }
   }, [auth]);
 
@@ -68,6 +70,7 @@ function App(props) {
           />
         )}
       />
+      
     </Router>
   );
 }
