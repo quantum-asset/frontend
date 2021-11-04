@@ -12,6 +12,8 @@ import LeftSideTags from "../Components/Maestros/Tags/Left/LeftSideTags";
 import RightSideTags from "../Components/Maestros/Tags/Right/RightSideTags";
 import LeftSideUsuarios from "../Components/Maestros/Usuarios/Left/LeftSideUsuarios";
 import RightSideUsuarios from "../Components/Maestros/Usuarios/Right/RightSideUsuarios";
+import ActivosMaestro from "../Components/Maestros/Activos/ActivosMaestro";
+import LocacionMaestros from "../Components/Maestros/Locaciones/LocacionMaestros";
 const Maestros = (props) => {
   const { setNavBarTitle } = props;
   const [value, setValue] = React.useState(0);
@@ -19,6 +21,7 @@ const Maestros = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  //Listar todos las entidades necesarias 1 vez
   useEffect(() => {
     setNavBarTitle?.("Gestión de tablas maestras");
   }, []);
@@ -43,20 +46,10 @@ const Maestros = (props) => {
         index={0}
         //title={<Title title="Gestión de Activos Fijos" />}
       >
-        <div className="left-side">
-          <LeftSideActivos />
-        </div>
-        <div className="right-side">
-          <RightSideActivos />
-        </div>
+        <ActivosMaestro />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className="left-side">
-          <LeftSideLocaciones />
-        </div>
-        <div className="right-side">
-          <RightSideLocaciones />
-        </div>
+        <LocacionMaestros />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className="left-side">

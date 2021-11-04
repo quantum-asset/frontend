@@ -5,13 +5,13 @@ import Title from "../../../Title/Title";
 import { ActivosController } from "../../../../Controller/ActivosController";
 
 const RightSideActivos = (props) => {
-   
+   const {tipoActivos}=props;
   return (
     <Fragment>
-      <Title title="Tipos de Activos Fijos" />
+      <Title smallTitle="Tipos de Activos Fijos" />
 
-      <TablaTpoActivos />
-      <Title title="Distribucion de Activos Fijos" />
+      <TablaTpoActivos tipoActivos={tipoActivos}/>
+      <Title smallTitle="Distribucion de Activos Fijos" />
 
       <ChartActivos />
     </Fragment>

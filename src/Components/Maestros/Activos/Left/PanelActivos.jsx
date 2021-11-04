@@ -3,7 +3,7 @@ import "./PanelActivos.scss";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import { Button, FormLabel, Grid } from "@mui/material";
+import { Button, FormLabel, Grid, Tooltip } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import SearchInputText from "../../../Formulario/SearchInputText";
 import ScrollDialog from "../../../../Templates/Dialogs/ScrollDialog";
@@ -14,7 +14,7 @@ const PanelActivos = (props) => {
   const [localFiltros, setLocalFiltros] = useState([
     { name: "DENOMINACION", value: "" },
     { name: "LOCACION", value: "" },
-    { name: "TIPO_ACTIVO", value: "" },
+    { name: "PROVEEDOR", value: "" },
     { name: "COD_TAG", value: "" },
     { name: "CENTRO_COSTO", value: "" },
   ]);
@@ -47,7 +47,7 @@ const PanelActivos = (props) => {
         alignItems="stretch"
       >
         <Grid item>
-          <Grid container >
+          <Grid container>
             <Grid item md={6} xs={12}>
               <SearchInputText
                 onChange={handleChange}
@@ -92,21 +92,24 @@ const PanelActivos = (props) => {
                 >
                   Subir CSV
                 </Button>
-                <Fab
-                  color="primary"
-                  aria-label="add"
-                  size="small"
-                  style={{ margin: "1px" }}
-                  onClick={() => setOpenDialogRecuperacion(true)}
-                >
-                  <AddIcon />
-                </Fab>
+
+                <Tooltip title="Agregar Nuevo Activo">
+                  <Fab
+                    color="primary"
+                    aria-label="add"
+                    size="small"
+                    style={{ margin: "1px" }}
+                    onClick={() => setOpenDialogRecuperacion(true)}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container spacing={1} >
+          <Grid container spacing={1}>
             <Grid item md={3} sm={12} xs={12}>
               {" "}
               <SearchInputText
@@ -120,8 +123,7 @@ const PanelActivos = (props) => {
               />
             </Grid>
             <Grid item md={3} sm={12} xs={12}>
-              
-            <SearchInputText
+              <SearchInputText
                 onChange={handleChange}
                 style={{ margin: "2px 0" }}
                 name={"LOCACION"}
@@ -135,22 +137,22 @@ const PanelActivos = (props) => {
               <SearchInputText
                 onChange={handleChange}
                 style={{ margin: "2px 0" }}
-                name={"DENOMINACION"}
+                name={"PROVEEDOR"}
                 fullWidth
-                value={filtros.DENOMINACION}
-                placeholder="Denominación del activo"
-                label={"Denominación"}
+                //value={filtros.DENOMINACION}
+                placeholder="Razon social del proveedor"
+                label={"Proveedor"}
               />
             </Grid>
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
                 style={{ margin: "2px 0" }}
-                name={"DENOMINACION"}
+                name={"TIPO_ACTIVO"}
                 fullWidth
                 value={filtros.DENOMINACION}
-                placeholder="Denominación del activo"
-                label={"Denominación"}
+                placeholder="Tipo de activo"
+                label={"Tipo de Activo"}
               />
             </Grid>
           </Grid>

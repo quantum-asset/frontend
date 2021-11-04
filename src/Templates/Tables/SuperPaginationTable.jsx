@@ -105,7 +105,7 @@ function createData(name, calories, fat) {
   return { name, calories, fat };
 }
 
-export default function PaginationTable(props) {
+export default function SuperPaginationTable(props) {
   //
   console.log("SUperTable props", props);
   const { rows = [], headers } = props;
@@ -128,7 +128,7 @@ export default function PaginationTable(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} size="small" aria-label="custom pagination table">
+      <Table sx={{ minWidth: 500 }}  aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             {headers &&

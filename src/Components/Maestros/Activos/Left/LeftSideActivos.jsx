@@ -9,23 +9,16 @@ import PanelActivos from "./PanelActivos";
 import TablaActivos from "./TablaActivos";
 
 const LeftSideActivos = (props) => {
-  //lista de activos
-  const [activos, setActivos] = useState([]);
-  //lista de tags
-  const [tags, setTags] = useState([]);
-  //lista de locaciones
-  const [locaciones, setLocaciones] = useState([]);
-  //lista de Tipos de activo
-  const [tipoActivos, setTipoActivos] = useState([]);
-
+  const {activos,locaciones,tipoActivos,tags}=props;
+console.log("LeftSideActivos",props);
   const [rowsFiltrado, setRowsFiltrado] = useState([]);
   const [rowsServer, setRowsServer] = useState([]);
 
   const makeDataTable = async (
     activos = [],
     locaciones = [],
-    tags = [],
-    tipoActivos = []
+    tipoActivos = [],
+    tags = []
   ) => {
     console.log(
       "makeDataTable start",
@@ -81,37 +74,21 @@ const LeftSideActivos = (props) => {
     setRowsFiltrado(dataToTable);
   };
 
-  const init = async () => {
-    const activos = await ActivosController.list();
-    console.log("activos", activos.data);
-    const locaciones = await LocacionController.list();
-    console.log("locaciones", locaciones.data);
-    const tags = await TagController.list();
-    console.log("tags", tags.data);
-    const tipoActivos = await TipoActivoController
-      .list
-      //{ filtrosKeys: ["DENOMINACION"],filtrosValues: ["\"TI\""] }
-      ();
-    console.log("tipoActivos", tipoActivos);
-    setActivos(activos.data);
-    setLocaciones(locaciones.data);
-    setTags(tags.data);
+  const init = async (activos,locaciones,tipoActivos,tags) => {
+
     await makeDataTable(
-      activos.data,
-      locaciones.data,
-      tags.data,
-      tipoActivos.data
+      activos,locaciones,tipoActivos,tags
     );
   };
   useEffect(() => {
-    init();
-  }, []);
+    init(activos,locaciones,tipoActivos,tags);
+  }, [activos,locaciones,tipoActivos,tags]);
 
   ///////////////    panel filtros
   const [filtros, setFiltros] = useState([
     { name: "DENOMINACION", value: "" },
     { name: "LOCACION", value: "" },
-    { name: "TIPO_ACTIVO", value: "" },
+    { name: "PROVEEDOR", value: "" },
     { name: "COD_TAG", value: "" },
     { name: "CENTRO_COSTO", value: "" },
   ]);
