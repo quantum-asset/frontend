@@ -9,13 +9,14 @@
   background-color: transparent;
   .left-side {
     //background-color: rgb(255, 255, 255);
-    width: 70%;
-    margin: 1% 2%;
+    width: 75%;
+   margin: 12px 8px;
   }
   .right-side {
     // background-color: rgb(99, 50, 50);
-    margin: 1% 2%;
-    width: 30%;
+    margin: 12px 8px;
+
+    width: 25%;
   }
   @media (max-width: 600px) {
     width: calc(100% - 40px);

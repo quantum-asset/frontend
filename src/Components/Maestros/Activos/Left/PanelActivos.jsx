@@ -10,12 +10,31 @@ import ScrollDialog from "../../../../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../../../Formulario/FormInputText";
 
 const PanelActivos = (props) => {
-  const {download} = props;
-  const [filtros, setFriltros] = useState({ DENOMINACION: "" });
-  const handleChange = (value, name) => {
-    setFriltros({ ...filtros, [name]: value });
-    console.log("filtros", { ...filtros, [name]: value });
+  const { download, handleChangeFiltro, filtros } = props;
+  const [localFiltros, setLocalFiltros] = useState([
+    { name: "DENOMINACION", value: "" },
+    { name: "LOCACION", value: "" },
+    { name: "TIPO_ACTIVO", value: "" },
+    { name: "COD_TAG", value: "" },
+    { name: "CENTRO_COSTO", value: "" },
+  ]);
+  /**
+   * retorna (valor, nombre)
+   */
+  const handleChange = (value, nombre) => {
+    const newFiltros = localFiltros.map((x) => {
+      if (x.name === nombre) {
+        return { ...x, value: value };
+      }
+      return x;
+    });
+    setLocalFiltros(newFiltros);
+    handleChangeFiltro?.(newFiltros);
   };
+  useState(() => {
+    setLocalFiltros(filtros);
+  }, [filtros]);
+
   //Dialog Nuevo Editar
   const [openDialogRecuperacion, setOpenDialogRecuperacion] = useState(false);
 
@@ -28,18 +47,14 @@ const PanelActivos = (props) => {
         alignItems="stretch"
       >
         <Grid item>
-          <Grid
-            container
-            //spacing={1}
-            //style={{ margin: "7px 0 0 0" }}
-            //style={{ padding: "10px 1%" }}
-          >
+          <Grid container >
             <Grid item md={6} xs={12}>
               <SearchInputText
                 onChange={handleChange}
                 style={{ margin: "2px 0" }}
                 name={"DENOMINACION"}
-                value={filtros.DENOMINACION}
+                // value={localFiltros[0].value}
+                fullWidth
                 placeholder="Denominación del activo"
                 label={"Denominación"}
               />
@@ -58,7 +73,9 @@ const PanelActivos = (props) => {
                   //fullWidth
                   style={{ margin: "1px" }}
                   startIcon={<FileDownloadIcon />}
-                  onClick={()=>{download?.()}}
+                  onClick={() => {
+                    download?.();
+                  }}
                   //onClick={iniciarSesion}
                 >
                   Descargar
@@ -89,23 +106,37 @@ const PanelActivos = (props) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container style={{ margin: "5px 0" }}>
+          <Grid container spacing={1} >
             <Grid item md={3} sm={12} xs={12}>
               {" "}
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "7px 0" }}
-                name={"DENOMINACION"}
-                value={filtros.DENOMINACION}
-                placeholder="Denomisssnación del activo"
-                label={"Denominación"}
+                style={{ margin: "2px 0" }}
+                name={"COD_TAG"}
+                // value={localFiltros[0].value}
+                fullWidth
+                placeholder="Nro de tag"
+                label={"Num. de tag"}
+              />
+            </Grid>
+            <Grid item md={3} sm={12} xs={12}>
+              
+            <SearchInputText
+                onChange={handleChange}
+                style={{ margin: "2px 0" }}
+                name={"LOCACION"}
+                fullWidth
+                // value={localFiltros[0].value}
+                placeholder="Locación"
+                label={"Locación"}
               />
             </Grid>
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "7px 0" }}
+                style={{ margin: "2px 0" }}
                 name={"DENOMINACION"}
+                fullWidth
                 value={filtros.DENOMINACION}
                 placeholder="Denominación del activo"
                 label={"Denominación"}
@@ -114,18 +145,9 @@ const PanelActivos = (props) => {
             <Grid item md={3} sm={12} xs={12}>
               <SearchInputText
                 onChange={handleChange}
-                style={{ margin: "7px 0" }}
+                style={{ margin: "2px 0" }}
                 name={"DENOMINACION"}
-                value={filtros.DENOMINACION}
-                placeholder="Denominación del activo"
-                label={"Denominación"}
-              />
-            </Grid>
-            <Grid item md={3} sm={12} xs={12}>
-              <SearchInputText
-                onChange={handleChange}
-                style={{ margin: "7px 0" }}
-                name={"DENOMINACION"}
+                fullWidth
                 value={filtros.DENOMINACION}
                 placeholder="Denominación del activo"
                 label={"Denominación"}

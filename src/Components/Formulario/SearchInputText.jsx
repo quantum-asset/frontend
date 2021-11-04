@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import {  InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 const SearchInputText = (props) => {
-  const { name, onChange, value, label, placeholder, style } = props;
+  const {fullWidth,name, onChange, value, label, placeholder, style } = props;
   const [localValue, setLocalValue] = useState("");
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
+
   const handleChange = (e) => {
     setLocalValue(e.target.value);
     onChange?.(e.target.value, name );
@@ -21,7 +22,8 @@ const SearchInputText = (props) => {
         ),
       }}
       color="primary"
-      fullWidth
+      fullWidth={fullWidth}
+
       id="outlined-email-input"
       label={label || ""}
       type="search"
