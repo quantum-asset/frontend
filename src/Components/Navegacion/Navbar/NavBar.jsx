@@ -42,7 +42,7 @@ export default function (props) {
       <AppBar
         position="relative"
         style={{
-          backgroundColor: "whitesmoke",
+          backgroundColor: "white",
           color: "black",
           height: "65px",
           borderBottom: "7px solid " + YELLOW,

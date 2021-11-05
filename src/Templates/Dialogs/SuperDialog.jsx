@@ -9,8 +9,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
-import DeleteIcon from '@mui/icons-material/Delete';
-export default function ScrollDialog(props) {
+
+export default function SuperDialog(props) {
   const {
     open,
     onCancel,
@@ -21,8 +21,6 @@ export default function ScrollDialog(props) {
     body,
     children,
     onlyAccept,
-    onContinue,
-    onDiscard,
     ...other
   } = props;
   //const [open, setOpen] = React.useState(false);
@@ -48,8 +46,6 @@ export default function ScrollDialog(props) {
         {...other}
         open={open}
         onClose={handleClose}
-        maxWidth="sm"
-        fullWidth
         scroll={"paper"}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
@@ -57,20 +53,11 @@ export default function ScrollDialog(props) {
         <DialogTitle id="scroll-dialog-title">{title || ""}</DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-            {body ||
-              children ||
-              [...new Array(50)]
-                .map(
-                  () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-                )
-                .join("\n")}
+            {body || children || "body"}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {onCancel || onSave || onAccept || onContinue || onDiscard ? (
+          {onCancel || onSave || onAccept ? (
             <React.Fragment>
               {onCancel && (
                 <Button
@@ -98,24 +85,6 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                   onClick={handleAccept}
                 >
                   Aceptar
-                </Button>
-              )}
-              {onDiscard && (
-                <Button
-                  startIcon={<DeleteIcon />}
-                  variant="contained"
-                  onClick={() => onDiscard?.()}
-                >
-                  Descartar
-                </Button>
-              )}
-              {onContinue && (
-                <Button
-                  startIcon={<CheckCircleOutlineOutlinedIcon />}
-                  variant="contained"
-                  onClick={() => onContinue?.()}
-                >
-                  Continuar
                 </Button>
               )}
             </React.Fragment>

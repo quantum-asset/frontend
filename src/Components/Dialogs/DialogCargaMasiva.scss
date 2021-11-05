@@ -1,0 +1,16 @@
+.quantum-plantilla-descargar {
+ padding: 20px 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  .quantum-plantilla-label {
+  //margin: 10px 0;
+    
+    cursor: pointer;
+    display: flex;
+    text-decoration: underline;
+    color: blueviolet;
+  }
+}

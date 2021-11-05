@@ -18,7 +18,7 @@
 
     width: 25%;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 1000px) {
     width: calc(100% - 40px);
     flex-direction: column;
     //padding: 10px;

@@ -1,23 +1,33 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import "./Maestros.scss";
-import Title from "../Components/Title/Title";
-import LeftSideActivos from "../Components/Maestros/Activos/Left/LeftSideActivos";
-import RightSideActivos from "../Components/Maestros/Activos/Right/RightSideActivos";
-import LeftSideLocaciones from "../Components/Maestros/Locaciones/Left/LeftSideLocaciones";
-import RightSideLocaciones from "../Components/Maestros/Locaciones/Right/RightSideLocaciones";
 import LeftSideTags from "../Components/Maestros/Tags/Left/LeftSideTags";
 import RightSideTags from "../Components/Maestros/Tags/Right/RightSideTags";
 import LeftSideUsuarios from "../Components/Maestros/Usuarios/Left/LeftSideUsuarios";
 import RightSideUsuarios from "../Components/Maestros/Usuarios/Right/RightSideUsuarios";
 import ActivosMaestro from "../Components/Maestros/Activos/ActivosMaestro";
 import LocacionMaestros from "../Components/Maestros/Locaciones/LocacionMaestros";
+import ActivosDetalle from "../Components/Maestros/Activos/Detalle/ActivosDetalle";
 const Maestros = (props) => {
   const { setNavBarTitle } = props;
+
   const [value, setValue] = React.useState(0);
 
+  const [activoDetalle, setActivoDetalle] = useState(false);
+  const handleOpenDetalle = (activo) => {
+    setActivoDetalle(true);
+    console.log("activo elegido", activo);
+    setCurrentActivo(activo);
+  };
+  const handleCloseDetalle = () => {
+    //esta en evrmos opcional
+    setCurrentActivo(undefined);
+    setActivoDetalle(false);
+  };
+
+  //TABS
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -25,6 +35,10 @@ const Maestros = (props) => {
   useEffect(() => {
     setNavBarTitle?.("Gestión de tablas maestras");
   }, []);
+
+  //ACTIVOS
+  const [currentActivo, setCurrentActivo] = useState(undefined);
+  
   return (
     <Fragment>
       <Box sx={{ bgcolor: "#c4c4c4" }}>
@@ -46,7 +60,19 @@ const Maestros = (props) => {
         index={0}
         //title={<Title title="Gestión de Activos Fijos" />}
       >
-        <ActivosMaestro />
+        {activoDetalle && currentActivo? (
+          <ActivosDetalle
+            {...props}
+            handleLista={handleCloseDetalle}
+            currentActivo={currentActivo}
+          />
+        ) : (
+          <ActivosMaestro
+            {...props}
+            handleDetalle={handleOpenDetalle}
+            //handleCurrentActivo={handleCurrentActivo}
+          />
+        )}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <LocacionMaestros />

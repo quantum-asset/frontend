@@ -9,8 +9,8 @@ import PanelActivos from "./PanelActivos";
 import TablaActivos from "./TablaActivos";
 
 const LeftSideActivos = (props) => {
-  const {activos,locaciones,tipoActivos,tags}=props;
-console.log("LeftSideActivos",props);
+  const { activos, locaciones, tipoActivos, tags, handleDetalle } = props;
+  console.log("LeftSideActivos", props);
   const [rowsFiltrado, setRowsFiltrado] = useState([]);
   const [rowsServer, setRowsServer] = useState([]);
 
@@ -74,15 +74,16 @@ console.log("LeftSideActivos",props);
     setRowsFiltrado(dataToTable);
   };
 
-  const init = async (activos,locaciones,tipoActivos,tags) => {
-
-    await makeDataTable(
-      activos,locaciones,tipoActivos,tags
-    );
+  const init = async (activos, locaciones, tipoActivos, tags) => {
+    await makeDataTable(activos, locaciones, tipoActivos, tags);
   };
   useEffect(() => {
-    init(activos,locaciones,tipoActivos,tags);
-  }, [activos,locaciones,tipoActivos,tags]);
+    init(activos, locaciones, tipoActivos, tags);
+    return () => {
+      setRowsServer([]);
+      setRowsFiltrado([]);
+    };
+  }, [activos, locaciones, tipoActivos, tags]);
 
   ///////////////    panel filtros
   const [filtros, setFiltros] = useState([
@@ -112,7 +113,7 @@ console.log("LeftSideActivos",props);
       if (filtrosUpdated[i].value && filtrosUpdated[i].value.length > 0) {
         const currentKeyFilter = filtrosUpdated[i].name;
         const currentValueFilter = filtrosUpdated[i].value;
-   
+
         dataFiltrada = dataFiltrada.filter((x) =>
           x[currentKeyFilter]
             .toLowerCase()
@@ -139,16 +140,27 @@ console.log("LeftSideActivos",props);
     }
     downloadTexFile("activos.csv", headers + data);
   };
+  //detalle
+  const handleDetalleActivo = (id) => {
+    const activoEncontrado = rowsServer.filter((x) => x.ID_ACTIVO === id);
+    if (activoEncontrado.length > 0) {
+      handleDetalle?.(activoEncontrado[0]);
+    } else {
+      alert("No se encontró el activo");
+    }
+  };
   return (
     <Fragment>
-      {}
       <Title title="Gestión de Activos Fijos" />
       <PanelActivos
         handleChangeFiltro={handleChangeFiltro}
         filtros={filtros}
         download={downloadActivos}
       />
-      <TablaActivos rowsFiltrado={rowsFiltrado} />
+      <TablaActivos
+        rowsFiltrado={rowsFiltrado}
+        handleDetalle={handleDetalleActivo}
+      />
     </Fragment>
   );
 };

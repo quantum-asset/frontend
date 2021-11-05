@@ -1,13 +1,15 @@
 import { Delete, Edit } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton, Stack, Tooltip } from "@mui/material";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PaginationTable from "../../../../Templates/Tables/PaginationTable";
+import SuperPaginationTable from "../../../../Templates/Tables/SuperPaginationTable";
 import "./TablActivos.scss";
 const TablaActivos = (props) => {
   console.log("SUperTable TablaActivos props", props);
 
-  const { rowsFiltrado } = props;
+  const { rowsFiltrado ,handleDetalle} = props;
+  const [localRows,setLocalRows]=useState([]);
   const handleDelete = (id) => {
     alert("delete " + id);
   };
@@ -15,13 +17,18 @@ const TablaActivos = (props) => {
     alert("edit " + id);
   };
   const handleSee = (id) => {
-    alert("see " + id);
+   // alert("see " + id);
+   
+    handleDetalle?.(id);
   };
+  useEffect(()=>{
+    setLocalRows(rowsFiltrado);
+  },[rowsFiltrado]);
   return (
     <Fragment>
-      <PaginationTable
+      <SuperPaginationTable
         headers={columns(handleDelete, handleEdit, handleSee)}
-        rows={rowsFiltrado}
+        rows={localRows}
       />
       {/**
        *

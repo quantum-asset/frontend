@@ -16,7 +16,7 @@ export default function SuperDenseTable(props) {
           <TableRow>
             {headers &&
               headers.map((header, index) => (
-                <TableCell key={index} align={index === 0 ? "left" : "center"}>
+                <TableCell key={index} align={"left"}>
                   <h3>{header.title}</h3>
                 </TableCell>
               ))}
@@ -29,7 +29,7 @@ export default function SuperDenseTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               {headers.map((h, index) => (
-                <TableCell key={index} align={index === 0 ? "left" : "center"}>
+                <TableCell key={index} align={"left"}>
                   {h.render ? h.render(row) : row[h.field]}
                 </TableCell>
               ))}

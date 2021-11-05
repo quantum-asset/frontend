@@ -8,7 +8,17 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import SearchInputText from "../../../Formulario/SearchInputText";
 import ScrollDialog from "../../../../Templates/Dialogs/ScrollDialog";
 import FormInputText from "../../../Formulario/FormInputText";
+import DialogCargaMasiva from "../../../Dialogs/DialogCargaMasiva";
+/**
+1,null,1,1,1,Smarthphone,Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;,Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja,CTFVYG-VTY-VYB-0001,Phantom black,Galaxy S21 +; SM-G996U1,Samsung,4500,555089,481656562,1022295110,SAMTRONICS S.A,TI,null,
+2,20,1,1,1,Smarthphone,Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;,Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja,CTFVYG-VTY-VYB-0002,Phantom black,Galaxy S21 +; SM-G996U2,Samsung,4501,555089,481656562,1022295110,SAMTRONICS S.A,TI,2021-11-23
 
+ */
+
+const dataPruebaRow1 = `1,null,1,1,1,Smarthphone,Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;,Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja,CTFVYG-VTY-VYB-0001,Phantom black,Galaxy S21 +; SM-G996U1,Samsung,4500,555089,481656562,1022295110,SAMTRONICS S.A,TI,null\n`;
+const dataPruebaRow2 = `2,20,1,1,1,Smarthphone,Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;,Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja,CTFVYG-VTY-VYB-0002,Phantom black,Galaxy S21 +; SM-G996U2,Samsung,4501,555089,481656562,1022295110,SAMTRONICS S.A,TI,2021-11-23\n`;
+const dataPruebaHeaders =
+  "ID_TAG,ID_ARCHIVO,ID_TIPO_ACTIVO,ID_LOCACION,ID_AREA_RESPONSABLE,DENOMINACION,CARACTERISTICAS,OBSERVACIONES,SERIE,COLOR,MODELO,MARCA,COSTO_ADQUISICION,NUM_GUIA_REMISION,NUM_FACTURA,PROVEEDOR_RUC,PROVEEDOR_RAZON_SOCIAL,CENTRO_COSTO,FECHA_DE_ALTA";
 const PanelActivos = (props) => {
   const { download, handleChangeFiltro, filtros } = props;
   const [localFiltros, setLocalFiltros] = useState([
@@ -37,7 +47,11 @@ const PanelActivos = (props) => {
 
   //Dialog Nuevo Editar
   const [openDialogRecuperacion, setOpenDialogRecuperacion] = useState(false);
-
+  //DIALOG CARGA MASIVA
+  const [openCargaMasiva, setOpenCargaMasiva] = useState(false);
+  const handleCloseCargaMasiva = () => {
+    setOpenCargaMasiva(false);
+  };
   return (
     <div className="panel-activos-container">
       <Grid
@@ -88,7 +102,7 @@ const PanelActivos = (props) => {
                   //fullWidth
                   startIcon={<UploadFileIcon />}
                   //onClick={iniciarSesion}
-                  //onClick={iniciarSesion}
+                  onClick={() => setOpenCargaMasiva(true)}
                 >
                   Subir CSV
                 </Button>
@@ -158,6 +172,15 @@ const PanelActivos = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      {/** CARGA MASIVAAAA*/}
+      <DialogCargaMasiva
+        open={openCargaMasiva}
+        headers={dataPruebaHeaders}
+        dataPrueba={`${dataPruebaRow1}${dataPruebaRow2}`}
+        entidad={"Activos"}
+        onClose={() => setOpenCargaMasiva?.()}
+      />
+      {/** NUEVO ACTIVO O EDITAR */}
       <ScrollDialog
         open={openDialogRecuperacion}
         // onCancel={() => {}}
@@ -187,3 +210,13 @@ const PanelActivos = (props) => {
   );
 };
 export default PanelActivos;
+/**
+{"ID_TAG":1,"ID_ARCHIVO":null,"ID_TIPO_ACTIVO":1,"ID_LOCACION":1,"ID_AREA_RESPONSABLE":1,"DENOMINACION":"Smarthphone","CARACTERISTICAS":"Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;","OBSERVACIONES":"Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja","SERIE":"CTFVYG-VTY-VYB-0001","COLOR":"Phantom black","MODELO":"Galaxy S21 +; SM-G996U1","MARCA":"Samsung","COSTO_ADQUISICION":4500,"NUM_GUIA_REMISION":"555089","NUM_FACTURA":"481656562","PROVEEDOR_RUC":"1022295110","PROVEEDOR_RAZON_SOCIAL":"SAMTRONICS S.A","CENTRO_COSTO":"TI","FECHA_DE_ALTA":null},
+{"ID_TAG":2,"ID_ARCHIVO":null,"ID_TIPO_ACTIVO":1,"ID_LOCACION":1,"ID_AREA_RESPONSABLE":1,"DENOMINACION":"Smarthphone","CARACTERISTICAS":"Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;","OBSERVACIONES":"Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja","SERIE":"CTFVYG-VTY-VYB-0002","COLOR":"Phantom black","MODELO":"Galaxy S21 +; SM-G996U2","MARCA":"Samsung","COSTO_ADQUISICION":4501,"NUM_GUIA_REMISION":"555089","NUM_FACTURA":"481656562","PROVEEDOR_RUC":"1022295110","PROVEEDOR_RAZON_SOCIAL":"SAMTRONICS S.A","CENTRO_COSTO":"TI","FECHA_DE_ALTA":null},
+ID_ACTIVO,ID_TAG,ID_ARCHIVO,ID_TIPO_ACTIVO,ID_LOCACION,ID_AREA_RESPONSABLE,DENOMINACION,CARACTERISTICAS,OBSERVACIONES,SERIE,COLOR,MODELO,MARCA,COSTO_ADQUISICION,NUM_GUIA_REMISION,NUM_FACTURA,PROVEEDOR_RUC,PROVEEDOR_RAZON_SOCIAL,CENTRO_COSTO,FECHA_DE_ALTA
+
+1,null,1,1,1,"Smarthphone","Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;","Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja","CTFVYG-VTY-VYB-0001","Phantom black","Galaxy S21 +; SM-G996U1","Samsung",4500,"555089","481656562","1022295110","SAMTRONICS S.A","TI",null
+2,20,1,1,1,"Smarthphone","Pantalla: 6,7 pulgadas;    Resolución: 2.400 x 1.080 píxeles;    Tasa de actualización máxima: 120 Hz;    Procesador: Exynos 2100;    RAM: 8GB;    Almacenamiento: 256 GB;    MicroSD: no;    Cámaras principales: 12 megapíxeles(f/1.8) + gran angular 12 megapíxeles (f/2.2) + telefoto 64 megapíxeles (f/2.0) con zoom óptico híbrido 3x y zoom digital hasta de 30x;    Cámara frontal: 10 megapíxeles;   Resistencia al agua: sí, con la certificación IP68;    Batería: 4.800m Ah;    Carga inalámbrica: sí;    Carga inalámbrica reversible: sí;    Carga rápida: 25 vatios (25W);    Sistema operativo: Android 11;    5G: sí, mmWave y Sub-6;    Lector de huellas: sí, en la pantalla;","Sin conector de audífonos de 3,5 mm, UWB, NFC (sin MST), pantalla planta y no trae cargador ni audífonos en la caja","CTFVYG-VTY-VYB-0002","Phantom black","Galaxy S21 +; SM-G996U2","Samsung",4501,"555089","481656562","1022295110","SAMTRONICS S.A","TI",02/11/2021
+
+
+ */
