@@ -1,8 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { ActivosController } from "../../../../Controller/ActivosController";
-import { LocacionController } from "../../../../Controller/LocacionController";
-import { TagController } from "../../../../Controller/TagController";
-import { TipoActivoController } from "../../../../Controller/TipoActivoController";
 import { downloadTexFile } from "../../../../utils/files.utils";
 import Title from "../../../Title/Title";
 import PanelActivos from "./PanelActivos";

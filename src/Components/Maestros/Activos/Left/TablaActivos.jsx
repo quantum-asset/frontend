@@ -4,7 +4,7 @@ import { IconButton, Stack, Tooltip } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import PaginationTable from "../../../../Templates/Tables/PaginationTable";
 import SuperPaginationTable from "../../../../Templates/Tables/SuperPaginationTable";
-import "./TablActivos.scss";
+//import "./TablActivos.scss";
 const TablaActivos = (props) => {
   console.log("SUperTable TablaActivos props", props);
 

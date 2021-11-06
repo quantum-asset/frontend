@@ -9,7 +9,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
-import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 export default function ScrollDialog(props) {
   const {
     open,
@@ -54,7 +56,30 @@ export default function ScrollDialog(props) {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">{title || ""}</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">
+          {title || ""}
+
+          {onClose || onDiscard ? (
+            <IconButton
+              aria-label="close"
+              onClick={() => {
+                if (onClose) {
+                  onClose?.();
+                } else {
+                  onDiscard?.();
+                }
+              }}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
+        </DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
             {body ||

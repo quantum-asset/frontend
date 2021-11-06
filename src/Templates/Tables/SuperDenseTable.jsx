@@ -23,7 +23,7 @@ export default function SuperDenseTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows && rows.length>0 ? rows.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -34,7 +34,14 @@ export default function SuperDenseTable(props) {
                 </TableCell>
               ))}
             </TableRow>
-          ))}
+          ))
+        
+        
+        :
+        <div style={{display:"flex", minHeight:"100px",width:"100%", alignItems:"center",justifyContent:"center"}}>
+          Aun no hay Tipos de activo regitrados
+        </div>
+        }
         </TableBody>
       </Table>
     </TableContainer>

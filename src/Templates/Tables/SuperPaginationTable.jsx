@@ -167,21 +167,21 @@ export default function SuperPaginationTable(props) {
               </StyledTableRow>
             ))
           ) : (
-            <StyledTableRow style={{ height: 53 * emptyRows }}>
+            <StyledTableRow style={{ height: 53 * emptyRows,width:"100%" }}>
               {/**
                * aqui hago el loading
                *  y el no hay datos
                */}
               <div
                 style={{
-                  height: "400px",
+                  minHeight: "400px",
                   width: "100%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                No hay datos que mostrar
+                Aún no hay activos fijos registrados
               </div>
             </StyledTableRow>
           )}

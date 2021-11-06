@@ -10,12 +10,20 @@ import RightSideUsuarios from "../Components/Maestros/Usuarios/Right/RightSideUs
 import ActivosMaestro from "../Components/Maestros/Activos/ActivosMaestro";
 import LocacionMaestros from "../Components/Maestros/Locaciones/LocacionMaestros";
 import ActivosDetalle from "../Components/Maestros/Activos/Detalle/ActivosDetalle";
+import TagsMaestro from "../Components/Maestros/Tags/TagsMaestro";
 const Maestros = (props) => {
   const { setNavBarTitle } = props;
 
   const [value, setValue] = React.useState(0);
-
+  //ACTIVOS
+  const [currentActivo, setCurrentActivo] = useState(undefined);
   const [activoDetalle, setActivoDetalle] = useState(false);
+
+  //TAGS
+  const [currentTag, setCurrentTag] = useState(undefined);
+  const [tagDetalle, setTagDetalle] = useState(false);
+
+
   const handleOpenDetalle = (activo) => {
     setActivoDetalle(true);
     console.log("activo elegido", activo);
@@ -36,8 +44,7 @@ const Maestros = (props) => {
     setNavBarTitle?.("Gestión de tablas maestras");
   }, []);
 
-  //ACTIVOS
-  const [currentActivo, setCurrentActivo] = useState(undefined);
+
   
   return (
     <Fragment>
@@ -77,13 +84,20 @@ const Maestros = (props) => {
       <TabPanel value={value} index={1}>
         <LocacionMaestros />
       </TabPanel>
+      {/**
+       * TAGS gestion y alertas de necesidades
+       */}
       <TabPanel value={value} index={2}>
-        <div className="left-side">
+     
+     
+        {/* <div className="left-side">
           <LeftSideTags />
         </div>
         <div className="right-side">
           <RightSideTags />
-        </div>
+        </div> */}
+<TagsMaestro/>
+
       </TabPanel>
       <TabPanel value={value} index={3}>
         <div className="left-side">
