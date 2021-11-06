@@ -102,6 +102,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                   startIcon={<CancelOutlinedIcon />}
                   variant="text"
                   onClick={handleCancel}
+                  style={{ textTransform: "capitalize" }}
                 >
                   Cancelar
                 </Button>
@@ -111,6 +112,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                 <Button
                   startIcon={<SaveOutlinedIcon />}
                   variant="contained"
+                  style={{ textTransform: "capitalize" }}
                   onClick={handleClose}
                 >
                   Guardar
@@ -120,6 +122,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                 <Button
                   startIcon={<CheckCircleOutlineOutlinedIcon />}
                   variant="contained"
+                  style={{ textTransform: "capitalize" }}
                   onClick={handleAccept}
                 >
                   Aceptar
@@ -128,7 +131,8 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
               {onDiscard && (
                 <Button
                   startIcon={<DeleteIcon />}
-                  variant="contained"
+                  variant="outlined"
+                  style={{ textTransform: "capitalize" }}
                   onClick={() => onDiscard?.()}
                 >
                   Descartar
@@ -138,6 +142,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
                 <Button
                   startIcon={<CheckCircleOutlineOutlinedIcon />}
                   variant="contained"
+                  style={{ textTransform: "capitalize" }}
                   onClick={() => onContinue?.()}
                 >
                   Continuar
@@ -147,12 +152,20 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
           ) : (
             <React.Fragment>
               {!onlyAccept && (
-                <Button variant="text" onClick={handleClose}>
+                <Button
+                  variant="text"
+                  onClick={handleClose}
+                  style={{ textTransform: "capitalize" }}
+                >
                   Cancelar
                 </Button>
               )}
 
-              <Button variant="contained" onClick={handleClose}>
+              <Button
+                variant="contained"
+                onClick={handleClose}
+                style={{ textTransform: "capitalize" }}
+              >
                 Aceptar
               </Button>
             </React.Fragment>

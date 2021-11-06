@@ -155,7 +155,7 @@ const Recover = (props) => {
                 />
 
                 <Button
-                  style={{ margin: "18px 2%" }}
+                  style={{ margin: "18px 2%", textTransform: "capitalize" }}
                   color="primary"
                   variant="contained"
                   fullWidth
@@ -195,7 +195,7 @@ const Recover = (props) => {
                 />
 
                 <Button
-                  style={{ margin: "18px 2%" }}
+                  style={{ margin: "18px 2%", textTransform: "capitalize" }}
                   color="primary"
                   variant="contained"
                   fullWidth
@@ -208,7 +208,7 @@ const Recover = (props) => {
               <Fragment>
                 <p>Se ha cambiado su contraseña satisfactoriamente</p>
                 <Button
-                  style={{ margin: "18px 2%" }}
+                  style={{ margin: "18px 2%", textTransform: "capitalize" }}
                   color="primary"
                   variant="contained"
                   fullWidth

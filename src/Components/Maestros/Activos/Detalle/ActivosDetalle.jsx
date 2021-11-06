@@ -82,7 +82,7 @@ const ActivosDetalle = (props) => {
               variant="contained"
               //size="small"
               //fullWidth
-              style={{ margin: "1px" }}
+              style={{ margin: "1px",textTransform:"capitalize" }}
               startIcon={<Edit />}
               //onClick={() => {         download?.();                  }}
               //onClick={iniciarSesion}
@@ -93,7 +93,7 @@ const ActivosDetalle = (props) => {
               color="primary"
               variant="contained"
               //size="small"
-              style={{ margin: "1px" }}
+              style={{ margin: "1px",textTransform:"capitalize" }}
               //fullWidth
               startIcon={<Delete />}
               //onClick={iniciarSesion}
@@ -164,7 +164,7 @@ const ActivosDetalle = (props) => {
                 </Grid>
                 <Grid item xs={12} style={{marginTop:"1%"}}>
                   <FormLabel component="legend">Observaciones: </FormLabel>
-                  <p>{currentActivo.OBSERVACIONES || "-"}</p>
+                  <p>{currentActivo.OBSERVCIONES || "-"}</p>
                 </Grid>
               </Grid>
             </Paper>

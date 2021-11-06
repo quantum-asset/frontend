@@ -18,15 +18,14 @@ const intToRGB = function (value, alpha, max) {
 //////////////////////////////////////////////////////////////////////////////////
 ///////////////////        COMPONENT       ///////////////
 //////////////////////////////////////////////////////////////////////////////////
-
-const ChartActivos = (props) => {
-  const { activos, locaciones } = props;
+const ChartAlertaTags = (props) => {
+  const { necesidadTags, locaciones } = props;
   const [dataChart, setDataChart] = useState({
     labels: [],
     datasets: [{ label: "Activoooos", data: [] }],
   });
 
-  const init = (activos = [], locaciones = []) => {
+  const init = (necesidadTags = [], locaciones = []) => {
     // const locacionesLabels= locaciones.map(x=>x.DENOMINACION);
     let locacionesLabels = [];
     let cantActivosData = [];
@@ -35,9 +34,9 @@ const ChartActivos = (props) => {
     for (let i = 0; i < locaciones.length; i++) {
       const currentLocacion = locaciones[i];
       locacionesLabels.push(currentLocacion.DENOMINACION);
-      const cantActivos = activos.reduce((acum, curr) => {
+      const cantActivos = necesidadTags.reduce((acum, curr) => {
         if (curr.ID_LOCACION === currentLocacion.ID_LOCACION) {
-          acum++;
+          acum+=curr.CANTIDAD;
         }
         return acum;
       }, 0);
@@ -79,12 +78,12 @@ const ChartActivos = (props) => {
     });
   };
   useEffect(() => {
-    init(activos, locaciones);
-  }, [activos, locaciones]);
+    init(necesidadTags, locaciones);
+  }, [necesidadTags, locaciones]);
   return (
     <Fragment>
       <SuperChartSummary dataChart={dataChart} />
     </Fragment>
   );
 };
-export default ChartActivos;
+export default ChartAlertaTags;

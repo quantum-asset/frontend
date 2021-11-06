@@ -144,7 +144,7 @@ const Home = (props) => {
             </button>
 
             <Button
-              style={{ margin: "18px 2%" }}
+              style={{ margin: "18px 2%" ,textTransform:"capitalize"}}
               color="primary"
               variant="contained"
               fullWidth

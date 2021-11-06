@@ -7,7 +7,7 @@ import LeftSideActivos from "./Left/LeftSideActivos";
 import RightSideActivos from "./Right/RightSideActivos";
 
 const ActivosMaestro = (props) => {
-  const {  handleDetalle } = props;
+  const { handleDetalle } = props;
   //lista de activos
   const [activos, setActivos] = useState([]);
   //lista de tags
@@ -47,8 +47,11 @@ const ActivosMaestro = (props) => {
         />
       </div>
       <div className="right-side">
-        <RightSideActivos tipoActivos={tipoActivos}  activos={activos}
-          locaciones={locaciones} />
+        <RightSideActivos
+          tipoActivos={tipoActivos}
+          activos={activos}
+          locaciones={locaciones}
+        />
       </div>
     </Fragment>
   );

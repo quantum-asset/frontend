@@ -85,7 +85,7 @@ const PanelActivos = (props) => {
                   variant="contained"
                   //size="small"
                   //fullWidth
-                  style={{ margin: "1px" }}
+                  style={{ margin: "1px", textTransform: "capitalize" }}
                   startIcon={<FileDownloadIcon />}
                   onClick={() => {
                     download?.();
@@ -98,7 +98,7 @@ const PanelActivos = (props) => {
                   color="primary"
                   variant="contained"
                   //size="small"
-                  style={{ margin: "1px" }}
+                  style={{ margin: "1px", textTransform: "capitalize" }}
                   //fullWidth
                   startIcon={<UploadFileIcon />}
                   //onClick={iniciarSesion}

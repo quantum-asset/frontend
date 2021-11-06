@@ -34,8 +34,8 @@ const SuperChartSummary = (props) => {
   const { dataChart } = props;
   return (
     <div className="main-chart-summary-container">
-      <div className="chart-title">Activos por Locacion</div>
-
+      {/* <div className="chart-title">Activos por Locacion</div>
+ */}
       <div className="chart-chart">
         <Doughnut
           data={dataChart}

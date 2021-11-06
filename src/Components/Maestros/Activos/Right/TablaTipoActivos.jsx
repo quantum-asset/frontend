@@ -1,6 +1,5 @@
 import { Button, Fab } from "@mui/material";
 import React, { Fragment, useState } from "react";
-import DenseTable from "../../../../Templates/Tables/DenseTable";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton, Stack, Tooltip } from "@mui/material";
@@ -79,7 +78,7 @@ const TablaTipoActivos = (props) => {
             variant="contained"
             size="small"
             //fullWidth
-            style={{ margin: "1px" }}
+            style={{ margin: "1px" ,textTransform:"capitalize"}}
             startIcon={<FileDownloadIcon />}
             onClick={handleDownload}
             //onClick={iniciarSesion}

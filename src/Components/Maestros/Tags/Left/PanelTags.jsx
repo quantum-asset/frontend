@@ -48,9 +48,10 @@ const PanelTags = (props) => {
                 <Button
                   color="primary"
                   variant="contained"
+                 // style={{textDecoration:"none"}}
                   //size="small"
                   //fullWidth
-                  style={{ margin: "1px" }}
+                  style={{ margin: "1px",textTransform:"capitalize" }}
                   startIcon={<FileDownloadIcon />}
                   onClick={() => {
                     download?.();
@@ -63,7 +64,7 @@ const PanelTags = (props) => {
                   color="primary"
                   variant="contained"
                   //size="small"
-                  style={{ margin: "1px" }}
+                  style={{ margin: "1px" ,textTransform:"capitalize"}}
                   //fullWidth
                   startIcon={<UploadFileIcon />}
                   //onClick={iniciarSesion}

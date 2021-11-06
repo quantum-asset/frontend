@@ -63,6 +63,7 @@ export default function SuperDialog(props) {
                 <Button
                   startIcon={<CancelOutlinedIcon />}
                   variant="text"
+                  style={{ textTransform: "capitalize" }}
                   onClick={handleCancel}
                 >
                   Cancelar
@@ -73,6 +74,7 @@ export default function SuperDialog(props) {
                 <Button
                   startIcon={<SaveOutlinedIcon />}
                   variant="contained"
+                  style={{ textTransform: "capitalize" }}
                   onClick={handleClose}
                 >
                   Guardar
@@ -82,6 +84,7 @@ export default function SuperDialog(props) {
                 <Button
                   startIcon={<CheckCircleOutlineOutlinedIcon />}
                   variant="contained"
+                  style={{ textTransform: "capitalize" }}
                   onClick={handleAccept}
                 >
                   Aceptar
@@ -91,12 +94,20 @@ export default function SuperDialog(props) {
           ) : (
             <React.Fragment>
               {!onlyAccept && (
-                <Button variant="text" onClick={handleClose}>
+                <Button
+                  variant="text"
+                  style={{ textTransform: "capitalize" }}
+                  onClick={handleClose}
+                >
                   Cancelar
                 </Button>
               )}
 
-              <Button variant="contained" onClick={handleClose}>
+              <Button
+                variant="contained"
+                style={{ textTransform: "capitalize" }}
+                onClick={handleClose}
+              >
                 Aceptar
               </Button>
             </React.Fragment>

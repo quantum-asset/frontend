@@ -19,14 +19,18 @@
     width: 25%;
   }
   @media (max-width: 1000px) {
-    width: calc(100% - 40px);
+    width: calc(100% - 20px);
     flex-direction: column;
     //padding: 10px;
     .left-side {
       width: 100%;
+   margin: 12px 0px;
+
     }
     .right-side {
       width: 100%;
+   margin: 12px 0px;
+
     }
   }
 }
