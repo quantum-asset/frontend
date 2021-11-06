@@ -128,94 +128,133 @@ export default function PaginationTable(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} size="small" aria-label="custom pagination table">
-        <TableHead>
-          <TableRow>
-            {headers &&
-              headers.map((header, index) => (
-                <StyledTableCell
-                  key={index}
-                  align={
-                    index === headers.length - 1
-                      ? "center"
-                      : index === 0
-                      ? "left"
-                      : "right"
-                  }
-                >
-                  {header.title}
-                </StyledTableCell>
-              ))}
-            {/*   <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell> */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.length > 0 ? (
-            (rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <StyledTableRow key={row.name}>
-                {headers.map((h, index) => (
+      {rows === 0 ? (
+        <Paper>
+          {headers &&
+            headers.map((header, index) => (
+              <StyledTableCell
+                key={index}
+                align={
+                  index === headers.length - 1
+                    ? "center"
+                    : index === 0
+                    ? "left"
+                    : "right"
+                }
+              >
+                {header.title}
+              </StyledTableCell>
+            ))}
+
+          <div
+            style={{
+              height: "400px",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            No hay datos que mostrar
+          </div>
+        </Paper>
+      ) : (
+        <Table
+          sx={{ minWidth: 500 }}
+          size="small"
+          aria-label="custom pagination table"
+        >
+          <TableHead>
+            <TableRow>
+              {headers &&
+                headers.map((header, index) => (
                   <StyledTableCell
-                    component="th"
-                    scope="row"
                     key={index}
-                    align={index === 0 ? "left" : "right"}
+                    align={
+                      index === headers.length - 1
+                        ? "center"
+                        : index === 0
+                        ? "left"
+                        : "right"
+                    }
                   >
-                    {h.render ? h.render(row) : row[h.field]}
+                    {header.title}
                   </StyledTableCell>
                 ))}
+              {/*   <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell> */}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.length > 0 ? (
+              (rowsPerPage > 0
+                ? rows.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : rows
+              ).map((row) => (
+                <StyledTableRow key={row.name}>
+                  {headers.map((h, index) => (
+                    <StyledTableCell
+                      component="th"
+                      scope="row"
+                      key={index}
+                      align={index === 0 ? "left" : "right"}
+                    >
+                      {h.render ? h.render(row) : row[h.field]}
+                    </StyledTableCell>
+                  ))}
+                </StyledTableRow>
+              ))
+            ) : (
+              <StyledTableRow style={{ height: 53 * emptyRows }}>
+                {/**
+                 * aqui hago el loading
+                 *  y el no hay datos
+                 */}
+                <div
+                  style={{
+                    height: "400px",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  No hay datos que mostrar
+                </div>
               </StyledTableRow>
-            ))
-          ) : (
-            <StyledTableRow style={{ height: 53 * emptyRows }}>
-              {/**
-               * aqui hago el loading
-               *  y el no hay datos
-               */}
-              <div
-                style={{
-                  height: "400px",
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                No hay datos que mostrar
-              </div>
-            </StyledTableRow>
-          )}
+            )}
 
-          {emptyRows > 0 && (
-            <StyledTableRow style={{ height: 53 * emptyRows }}>
-              <StyledTableCell colSpan={6} /> No hay datos para mostrar
-            </StyledTableRow>
-          )}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  "aria-label": "rows per page",
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
+            {emptyRows > 0 && (
+              <StyledTableRow style={{ height: 53 * emptyRows }}>
+                <StyledTableCell colSpan={6} /> No hay datos para mostrar
+              </StyledTableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    "aria-label": "rows per page",
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      )}
     </TableContainer>
   );
 }

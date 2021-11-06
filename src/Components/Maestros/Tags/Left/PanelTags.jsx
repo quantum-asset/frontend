@@ -26,14 +26,16 @@ const PanelTags = (props) => {
         <Grid item>
           <Grid container>
             <Grid item md={6} xs={12}>
+              <FormLabel component="legend">Filtrar Tags</FormLabel>
+
               <SearchInputText
                 onChange={handleChangeFiltroTag}
                 style={{ margin: "2px 0" }}
                 //name={"DENOMINACION"}
                 // value={localFiltros[0].value}
                 fullWidth
-                placeholder="Denominación del activo"
-                label={"Denominación"}
+                placeholder="Buscar tags"
+                label={""}
               />
             </Grid>
             <Grid item md={6} xs={12}>

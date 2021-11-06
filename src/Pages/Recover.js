@@ -6,6 +6,7 @@ import "./Recover.scss";
 import FormInputText from "../Components/Formulario/FormInputText";
 import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
+import DialogAlert from "../Components/Dialogs/DialogAlert";
 
 const Recover = (props) => {
   console.log("RECOVER", props.match.params.codigo);
@@ -66,7 +67,7 @@ const Recover = (props) => {
       setError(false);
     }
   };
-  const cambiarPassword = async() => {
+  const cambiarPassword = async () => {
     console.log("error", error);
     console.log("idUser", idUser);
     if (error || !idUser) return;
@@ -76,7 +77,7 @@ const Recover = (props) => {
     });
     console.log("resposne", response);
     setLoading(false);
-    if(response.data.status==="success"){
+    if (response.data.status === "success") {
       setStep(2);
     }
   };
@@ -88,14 +89,25 @@ const Recover = (props) => {
     setCorreoRecuperacion(value);
   };
   const requestRecoveryCode = async () => {
-    const response = await axios.post("/auth/recover", {
+    const { data } = await axios.post("/auth/recover", {
       CORREO: correoRecuperacion,
     });
-    console.log("respuesta", response.data);
+    const { status, payload, message } = data;
+    if (status && status === "ok") {
+      setMessage(message);
+      setOpenAlert(true);
+    } else {
+      setMessage(message);
+      setOpenAlert(true);
+    }
+    console.log("respuesta", message);
   };
   useEffect(() => {
     checkCode(CODIGO_RECUPERAAICION);
   }, [CODIGO_RECUPERAAICION]);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [message, setMessage] = useState("");
+
   return (
     <Fragment>
       <Backdrop
@@ -200,7 +212,9 @@ const Recover = (props) => {
                   color="primary"
                   variant="contained"
                   fullWidth
-                  onClick={()=>{props.history.push("/")}}
+                  onClick={() => {
+                    props.history.push("/");
+                  }}
                 >
                   Iniciar ssión
                 </Button>
@@ -209,6 +223,12 @@ const Recover = (props) => {
           </div>
         </div>
       </MainWrapper>
+      <DialogAlert
+        title={"Reestablecimiento de contraseña"}
+        open={openAlert}
+        message={message}
+        onAccept={() => setOpenAlert(false)}
+      />
     </Fragment>
   );
 };

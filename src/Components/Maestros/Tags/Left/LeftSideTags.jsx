@@ -33,8 +33,8 @@ const LeftSideTags = (props) => {
     }
     let dataFiltrada = [];
     for (let i = 0; i < rowsServer.length; i++) {
-      const currentRow = JSON.stringify(rowsServer[i]);
-      if (currentRow.includes(filtros)) {
+      const currentRow = JSON.stringify(rowsServer[i]).toLowerCase();
+      if (currentRow.includes(filtros.toLowerCase())) {
         dataFiltrada.push(rowsServer[i]);
       }
     }
@@ -46,17 +46,16 @@ const LeftSideTags = (props) => {
 
   //DOWNLOAD TAGS
   const downloadTags = () => {
-    const headers =
-      "ID_LOCACION,ID_USUARIO,CODIGO\n";
+    const headers = "ID_TAG,ID_LOCACION,ID_USUARIO,CODIGO\n";
     let data = "";
-
+    console.log("descargar", rowsFiltrado);
     for (let i = 0; i < rowsFiltrado.length; i++) {
-      const { COD_TAG, DENOMINACION, TIPO_ACTIVO, LOCACION, CENTRO_COSTO } =
+      const { ID_TAG,CODIGO, ID_LOCACION, LOCACION_DENOMINACION,ID_USUARIO,USUARIO_NOMBRES} =
         rowsFiltrado[i];
-      const linea = `${COD_TAG},${DENOMINACION},${TIPO_ACTIVO},${LOCACION},${CENTRO_COSTO}\n`;
+      const linea = `${ID_TAG},${CODIGO},${ID_LOCACION},${LOCACION_DENOMINACION},${ID_USUARIO},${USUARIO_NOMBRES}\n`;
       data += linea;
     }
-    downloadTexFile("activos.csv", headers + data);
+    downloadTexFile("tags.csv", headers + data);
   };
   return (
     <Fragment>
@@ -68,7 +67,7 @@ const LeftSideTags = (props) => {
       />
       <TablaTags
         rowsFiltrado={rowsFiltrado}
-       // handleDetalle={handleDetalleActivo}
+        // handleDetalle={handleDetalleActivo}
       />
     </Fragment>
   );

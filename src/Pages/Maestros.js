@@ -23,7 +23,6 @@ const Maestros = (props) => {
   const [currentTag, setCurrentTag] = useState(undefined);
   const [tagDetalle, setTagDetalle] = useState(false);
 
-
   const handleOpenDetalle = (activo) => {
     setActivoDetalle(true);
     console.log("activo elegido", activo);
@@ -44,8 +43,6 @@ const Maestros = (props) => {
     setNavBarTitle?.("Gestión de tablas maestras");
   }, []);
 
-
-  
   return (
     <Fragment>
       <Box sx={{ bgcolor: "#c4c4c4" }}>
@@ -65,9 +62,10 @@ const Maestros = (props) => {
       <TabPanel
         value={value}
         index={0}
+        style={value === 0 ? {} : { padding: "0" }}
         //title={<Title title="Gestión de Activos Fijos" />}
       >
-        {activoDetalle && currentActivo? (
+        {activoDetalle && currentActivo ? (
           <ActivosDetalle
             {...props}
             handleLista={handleCloseDetalle}
@@ -81,25 +79,28 @@ const Maestros = (props) => {
           />
         )}
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel
+        value={value}
+        index={1}
+        style={value === 1 ? {} : { padding: "0" }}
+      >
         <LocacionMaestros />
       </TabPanel>
       {/**
        * TAGS gestion y alertas de necesidades
        */}
-      <TabPanel value={value} index={2}>
-     
-     
-        {/* <div className="left-side">
-          <LeftSideTags />
-        </div>
-        <div className="right-side">
-          <RightSideTags />
-        </div> */}
-<TagsMaestro/>
-
+      <TabPanel
+        style={value === 2 ? {} : { padding: "0" }}
+        value={value}
+        index={2}
+      >
+        <TagsMaestro />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel
+        style={value === 3 ? {} : { padding: "0" }}
+        value={value}
+        index={3}
+      >
         <div className="left-side">
           <LeftSideUsuarios />
         </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import ScrollDialog from "../../Templates/Dialogs/ScrollDialog";
 
-const DialogAlert = ({open, message, onContinue, onDiscard }) => {
+const DialogAlert = ({title, open, message, onContinue, onDiscard,onAccept }) => {
   return (
     <ScrollDialog
-      title="Inicio de sesión incorrecto :("
-      {...{open, onContinue, onDiscard }}
+      title={title || "Inicio de sesión incorrecto :("}
+      {...{open, onContinue, onDiscard,onAccept }}
     >
       <p>{message}</p>
     </ScrollDialog>

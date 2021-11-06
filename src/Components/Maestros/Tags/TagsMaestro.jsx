@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { ActivosController } from "../../../Controller/ActivosController";
 import { LocacionController } from "../../../Controller/LocacionController";
 import { TagController } from "../../../Controller/TagController";
-import { TipoActivoController } from "../../../Controller/TipoActivoController";
 import { UsuarioController } from "../../../Controller/UsuarioControler";
 import LeftSideTags from "./Left/LeftSideTags";
 import RightSideTags from "./Right/RightSideTags";
@@ -26,7 +24,9 @@ const TagsMaestro = (props) => {
     const tags = await TagController.list();
     console.log("tags", tags.data);
     const semiCompleteListTags = tags.data;
-
+    if (!semiCompleteListTags) {
+      return [];
+    }
     let dataTags = [];
     for (let i = 0; i < semiCompleteListTags.length; i++) {
       const currentTag = semiCompleteListTags[i];
@@ -39,23 +39,29 @@ const TagsMaestro = (props) => {
       }
       const usuario = usuarios.data.filter(
         (x) => x.ID_USUARIO === currentTag.ID_USUARIO
-      );
+      )[0];
       if (!usuario) {
         dataTags = [];
         break;
       }
+      let USUARIO_2APELLIDO = "-";
+      if (usuario.SEGUNDO_APELLIDO.toString() !== "null") {
+        USUARIO_2APELLIDO = usuario.SEGUNDO_APELLIDO;
+      }
+
+      console.log("USUARIO_2APELLIDO", USUARIO_2APELLIDO);
+      console.log("usuario.SEGUNDO_APELLIDO", usuario.SEGUNDO_APELLIDO);
       dataTags.push({
         ...currentTag,
         ...{
-          USUARIO_NOMBRES: usuario.NOMBRES,
-          USUARIO_APELLIDOS: `${usuario.PRIMER_APELLIDO}${
-            usuario.PRIMER_APELLIDO ? ` ${usuario.SEGUNDO_APELLIDO}` : ""
-          }`,
-          ...{
-            LOCACION_DENOMINACION: locacion.DENOMINACION,
-            LOCACION_DIRECCION: locacion.DIRECCION,
-          },
-        }
+          USUARIO_NOMBRES:
+            `${usuario.PRIMER_APELLIDO}${USUARIO_2APELLIDO} - ` +
+            usuario.NOMBRES,
+        },
+        ...{
+          LOCACION_DENOMINACION: locacion.DENOMINACION,
+          LOCACION_DIRECCION: locacion.DIRECCION,
+        },
       });
     }
 
@@ -68,7 +74,7 @@ const TagsMaestro = (props) => {
   return (
     <Fragment>
       <div className="left-side">
-        <LeftSideTags tags={tags}/>
+        <LeftSideTags tags={tags} />
       </div>
       <div className="right-side">
         <RightSideTags />

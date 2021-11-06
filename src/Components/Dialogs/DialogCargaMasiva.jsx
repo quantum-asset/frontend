@@ -79,6 +79,7 @@ const DialogCargaMasiva = (props) => {
         ))}
       </Dropzone>
       <DialogAlert
+        title="Descartar cambios?"
         open={openAlert}
         message="Aun no se ha cargado los archivos, seguro que desea cancelar la carga masiva"
         onDiscard={(e) => {
