@@ -1,0 +1,35 @@
+.quantum-page-inventario {
+    display: flex;
+    //width: 100%;
+    flex-direction: row;
+    padding: 10px 2%;
+    // height: 100%;
+    width: calc(100% - 90px);
+    //min-height: calc(100% - 220px);
+    background-color: transparent;
+    .left-side {
+      //background-color: rgb(255, 255, 255);
+      width: 75%;
+      margin: 12px 8px;
+    }
+    .right-side {
+      // background-color: rgb(99, 50, 50);
+      margin: 12px 8px;
+  
+      width: 25%;
+    }
+    @media (max-width: 1000px) {
+      width: calc(100% - 20px);
+      flex-direction: column;
+      //padding: 10px;
+      .left-side {
+        width: 100%;
+        margin: 12px 0px;
+      }
+      .right-side {
+        width: 100%;
+        margin: 12px 0px;
+      }
+    }
+  }
+  
