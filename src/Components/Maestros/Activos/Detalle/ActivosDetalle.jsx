@@ -70,8 +70,16 @@ const ActivosDetalle = (props) => {
               <p>{currentActivo?.MARCA || "..."}</p>
               <p>{currentActivo?.MODELO || "..."}</p>
               <p>
+                <b>Tag RFID: </b>
+                {currentActivo?.COD_TAG || "..."}
+              </p>
+              <p>
                 <b>Locacion: </b>
                 {currentActivo?.LOCACION || "..."}
+              </p>
+              <p>
+                <b>Centro de Costo: </b>
+                {currentActivo?.CENTRO_COSTO || "..."}
               </p>
             </div>
           </div>

@@ -135,7 +135,7 @@ export default function SuperPaginationTable(props) {
                   align={
                     index === headers.length - 1
                       ? "center"
-                      : index === 0
+                      : index !== 0
                       ? "left"
                       : "right"
                   }
@@ -159,7 +159,7 @@ export default function SuperPaginationTable(props) {
                     component="th"
                     scope="row"
                     key={index}
-                    align={index === 0 ? "left" : "right"}
+                    align={index !== 0 ? "left" : "right"}
                   >
                     {h.render ? h.render(row) : row[h.field]}
                   </StyledTableCell>

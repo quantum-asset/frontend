@@ -40,7 +40,7 @@ const SuperChartSummary = (props) => {
         <Doughnut
           data={dataChart}
           options={{
-            legend: { display: true, position: "right" },
+            legend: { display: true, position: "top" },
 
             datalabels: {
               display: true,

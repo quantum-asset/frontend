@@ -2,7 +2,6 @@ import { Delete, Edit } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton, Stack, Tooltip } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
-import PaginationTable from "../../../../Templates/Tables/PaginationTable";
 import SuperPaginationTable from "../../../../Templates/Tables/SuperPaginationTable";
 //import "./TablActivos.scss";
 const TablaActivos = (props) => {
