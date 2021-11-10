@@ -5,7 +5,7 @@ export const login = async (CORREO, CONTRASENIA) => {
   console.log("params", CORREO, CONTRASENIA);
   try {
     const result = await axios.post("/auth/login", { CORREO, CONTRASENIA });
-    console.log("login", result);
+    //console.log("login", result.data);
     if (!result || !result.data || !result.data.payload) {
       return ResponseController.error(
         "Ocurrio un error de conexión, por favor intentelo denuevo mas tarde. Si el error persiste, contacte al administrador de Quantum Asset"

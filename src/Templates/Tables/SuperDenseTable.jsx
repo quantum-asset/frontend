@@ -23,25 +23,32 @@ export default function SuperDenseTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows && rows.length>0 ? rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          {rows && rows.length > 0 ? (
+            rows.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                {headers.map((h, index) => (
+                  <TableCell key={index} align={"left"}>
+                    {h.render ? h.render(row) : row[h.field]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                minHeight: "100px",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              {headers.map((h, index) => (
-                <TableCell key={index} align={"left"}>
-                  {h.render ? h.render(row) : row[h.field]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))
-        
-        
-        :
-        <div style={{display:"flex", minHeight:"100px",width:"100%", alignItems:"center",justifyContent:"center"}}>
-          Aun no hay Tipos de activo regitrados
-        </div>
-        }
+              Aun no hay Tipos de activo regitrados
+            </div>
+          )}
         </TableBody>
       </Table>
     </TableContainer>

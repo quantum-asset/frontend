@@ -63,7 +63,7 @@ const DialogCargaMasiva = (props) => {
         value={filesCargaMasiva}
         maxFiles={10}
         maxFileSize={2998000}
-        accept=".csv, .xlsx"
+        accept=".csv"
         url="http://ec2-99-99-9-9.compute-1.amazonaws.com:2800/upload-my-file"
         fakeUploading
         localization={"ES-es"}
