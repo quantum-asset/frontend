@@ -1,0 +1,12 @@
+llamar  a globals 
+
+		=> tamaño archivo
+		=> intentos fallidos login
+		=> 
+llamar a roles y permisos por usuario ID_uSUARIO
+
+
+---- agregar un flag en toma_inventario_locacion
+		es_realizado
+		cant_activos_encontrados
+activo fecha de baja
